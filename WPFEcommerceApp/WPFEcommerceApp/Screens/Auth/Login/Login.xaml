@@ -1,0 +1,186 @@
+﻿<Window x:Class="WPFEcommerceApp.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFEcommerceApp"
+        xmlns:c="clr-namespace:CalcBinding;assembly=CalcBinding"
+        Icon="..\..\..\Assets\Icon\Home.png"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Title="Login" 
+        x:Name="LoginWindow"
+        Width="1212.63" Height="820">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0"
+                      CornerRadius="10"
+                      ResizeBorderThickness="0"/>
+    </WindowChrome.WindowChrome>
+    <Window.Resources>
+        <local:MultiValueConverter x:Key="MultiValueConverter"/>
+        <local:BindingProxy x:Key="proxy" Data="{Binding}"/>
+        <local:FalsesToTrueConverters x:Key="FalsesToTrueConverters"/>
+    </Window.Resources>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--ControlBar-->
+        <local:WindowControlBar Minimize="False" Maximize="False" 
+                                CloseCM="{Binding ElementName=LoginWindow,Path=DataContext.CloseCM}"/>
+        <materialDesign:DialogHost
+        CloseOnClickAway="False"
+        Identifier="Login"
+            Grid.Row="1">
+            <materialDesign:DialogHost.InputBindings>
+                <KeyBinding Key="Esc" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
+            </materialDesign:DialogHost.InputBindings>
+            <!--Content-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="2.1*"/>
+                </Grid.ColumnDefinitions>
+                <!--Left Column-->
+                <StackPanel Grid.Column="0">
+                    <Label Content="WELCOME!" 
+                           FontSize="63" 
+                           FontWeight="Bold" 
+                           Margin="65,100,0,-5"/>
+                    <Image Source="..\..\..\Assets\Images\img_Boarding.jpg" Margin="-30,50,-30,80"></Image>
+                </StackPanel>
+                <!--Right Column-->
+                <Border Padding="30 0 40 0" Grid.Column="1">
+                    <StackPanel 
+                            x:Name="RightColumnContainer">
+
+                        <Label Content="WANO" FontSize="40" FontWeight="Bold" Margin="0,220,0,20">
+                            <Label.InputBindings>
+                                <MouseBinding Gesture="RightDoubleClick" Command="{Binding KeyHandle_AdminAccess}"/>
+                            </Label.InputBindings>
+                        </Label>
+                        <TextBox
+                            x:Name="Email"
+                            Style="{StaticResource TextBoxHintBlackBorder}"
+                            materialDesign:HintAssist.Hint="Email"
+                            Width="auto"
+                            HorizontalContentAlignment="Stretch"
+                            Margin="0 30"
+                            materialDesign:HintAssist.HelperText="">
+                            <TextBox.Text>
+                                <Binding Path="Email" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                    <Binding.ValidationRules>
+                                        <local:EmailValidateRule ValidatesOnTargetUpdated="True" CanRefresh="False">
+                                            <local:EmailValidateRule.Wrapper>
+                                                <local:Wrapper AdminAccess="{Binding Data.AdminAccess, Source={StaticResource proxy}}"/>
+                                            </local:EmailValidateRule.Wrapper>
+                                        </local:EmailValidateRule>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <PasswordBox
+                            x:Name="Password"
+                            Style="{StaticResource PasswordOutlinedReveal}"            
+                            materialDesign:HintAssist.Hint="Password"
+                            materialDesign:TextFieldAssist.HasClearButton="True"
+                            Width="auto"
+                            HorizontalContentAlignment="Stretch"
+                            materialDesign:HintAssist.HelperText="">
+                            <materialDesign:PasswordBoxAssist.Password>
+                                <Binding Path="Password" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                    <Binding.ValidationRules>
+                                        <local:PasswordValidateRule ValidatesOnTargetUpdated="True" CanRefresh="False"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </materialDesign:PasswordBoxAssist.Password>
+                            <PasswordBox.InputBindings>
+                                <KeyBinding Key="Return" Command="{Binding KeyHandle_EnterLogin}"
+                                CommandParameter="{Binding ElementName=LoginButton, Path=IsEnabled}"/>
+                            </PasswordBox.InputBindings>
+                        </PasswordBox>
+
+                        <Grid Margin="0 19" >
+                            <CheckBox
+                                IsChecked="{Binding ElementName=LoginWindow, Path=DataContext.KeepSignIn, Mode=TwoWay}"
+                                HorizontalAlignment="Left"
+                                Background="{StaticResource BlackColorBrush}"
+                                Content="Keep me sign in"
+                                Foreground="{StaticResource BlackColorBrush}"
+                                FontSize="{DynamicResource FontSizeDescription}">
+                                <CheckBox.InputBindings>
+                                    <KeyBinding Key="Return" Command="{Binding ElementName=LoginWindow, Path=DataContext.KeyHandle_EnterKeepSignIn}"/>
+                                </CheckBox.InputBindings>
+                            </CheckBox>
+                            <Button
+                            Grid.Column="1"
+                            Margin="0 3 0 0"
+                            Style="{StaticResource Pressable}"
+                            HorizontalAlignment="Right"
+                            Command="{Binding OnForgotPassword}" 
+                            materialDesign:RippleAssist.Feedback ="Transparent">
+                                <Label Content="Forgot Password" Foreground="{DynamicResource BlackColorBrush}" FontSize="{DynamicResource FontSizeDescription}"/>
+                            </Button>
+                        </Grid>
+
+                        <!--Black buttons-->
+                        <Grid Margin="0 10 0 0">
+                            <Grid.Resources>
+                                <Style TargetType="Button" BasedOn="{StaticResource ButtonRectangle}">
+                                    <Setter Property="Width" Value="{c:Binding ElementName=RightColumnContainer, Path=ActualWidth/3}"/>
+                                    <Setter Property="Height" Value="45"/>
+                                    <Setter Property="Margin" Value="29 0"/>
+                                    <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="21"/>
+                                    <Setter Property="FontWeight" Value="Light"/>
+                                    <Setter Property="FontSize" Value="17"/>
+                                </Style>
+                            </Grid.Resources>
+                            <Button
+                            HorizontalAlignment="Left"
+                            Content="Sign up"
+                            Command="{Binding OnSignUp}"/>
+                            <Button x:Name="LoginButton"
+                                HorizontalAlignment="Right"
+                                Content="Login"
+                                Command="{Binding OnLogin}"
+                                CommandParameter="">
+                                <Button.IsEnabled>
+                                    <MultiBinding Converter="{StaticResource FalsesToTrueConverters}">
+                                        <Binding ElementName="Password" Path="(Validation.HasError)"/>
+                                        <Binding ElementName="Email" Path="(Validation.HasError)"/>
+                                    </MultiBinding>
+                                </Button.IsEnabled>
+                            </Button>
+                        </Grid>
+
+                        <!--Google Sign up-->
+                        <Button
+                        HorizontalAlignment="Center"
+                        Margin="0 22 0 0"
+                        Style="{StaticResource Pressable}"
+                        Command="{Binding OnGoogleSignIn}" 
+                        CommandParameter="{Binding ElementName=LoginWindow}"
+                        materialDesign:RippleAssist.Feedback ="Transparent"
+                        FontSize="10">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="..\..\..\Assets\Icon\icon_google.png"
+                                   Width="36" Height="36"
+                                   VerticalAlignment="Center"/>
+                                <Label Content="Sign in with google"
+                                   FontSize="15"
+                                   VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </materialDesign:DialogHost>
+        <!--<local:LoadingScreen Grid.Row="1" Visibility="{Binding ElementName=LoginWindow, 
+            Path=DataContext.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"/>-->
+    </Grid>
+</Window>

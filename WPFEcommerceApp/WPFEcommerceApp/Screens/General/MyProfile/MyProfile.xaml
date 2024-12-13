@@ -1,0 +1,199 @@
+﻿<UserControl x:Class="WPFEcommerceApp.MyProfile"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFEcommerceApp"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:c="clr-namespace:CalcBinding;assembly=CalcBinding"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="clr-namespace:CalcBinding;assembly=CalcBinding"
+             mc:Ignorable="d" 
+             d:DesignHeight="900" d:DesignWidth="1440">
+    <UserControl.Resources>
+        <Style BasedOn="{StaticResource {x:Type TabItem}}" TargetType="TabItem" x:Key="RadioTabItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <RadioButton IsChecked="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                     Style="{StaticResource RadioTabButton}"
+                                     Content="{TemplateBinding Header}"
+                                     FontSize="{StaticResource FontSizeHeadline2}"
+                                     FontWeight="Regular"
+                                     Width="{TemplateBinding Width}"
+                                     />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource WhiteColorBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"
+              >
+            <Border
+                    x:Name="MainBorder"
+                    CornerRadius="0 0 50 0"
+                    ClipToBounds="True"
+                    Background="{StaticResource WhiteColorBrush}">
+            </Border>
+            <Border Height="{c:Binding Path=ActualWidth*0.2, RelativeSource={RelativeSource Self}}">
+                <Border.OpacityMask>
+                    <VisualBrush Visual="{Binding ElementName=MainBorder}"/>
+                </Border.OpacityMask>
+                <local:AsyncImage
+                        Stretch="Fill"
+                        Width="{Binding ElementName=MainBorder, Path=ActualWidth}"
+                        Source="{Binding SourceImageBackground, UpdateSourceTrigger=PropertyChanged}"
+                        ScrollViewer.CanContentScroll="True">
+                    <local:AsyncImage.OpacityMask>
+                        <VisualBrush 
+                            Visual="{Binding ElementName=MainBorder}" 
+                            RenderOptions.BitmapScalingMode="HighQuality"/>
+                    </local:AsyncImage.OpacityMask>
+                </local:AsyncImage>
+            </Border>
+            <DockPanel HorizontalAlignment="Left"
+                    Margin="100 10">
+                <Button DockPanel.Dock="Top" Style="{StaticResource WhiteButton}"
+                        Command="{Binding OpenAvaDialog}"
+                        FontFamily="{StaticResource Regular}"
+                        Padding="5" Height="30"
+                        HorizontalAlignment="Center"
+                        Margin="10"
+                        FontSize="{StaticResource FontSizeDescription}"
+                        Foreground="{StaticResource BlackColorBrush}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal" Margin="5 0" >
+                            <fa:ImageAwesome
+                                    Margin="0 0 5 0"
+                                    Icon="Edit"
+                                    Height="10"
+                                    VerticalAlignment="Center"
+                                    Foreground="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"/>
+                            <TextBlock
+                                    FontFamily="{StaticResource Light}"
+                                    Text="Edit Ava"
+                                    VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button.Content>
+                    <Button.InputBindings>
+                        <MouseBinding 
+                            MouseAction="LeftDoubleClick"
+                            Command="{Binding DoubleClickCommand, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Button.InputBindings>
+                </Button>
+                <Border DockPanel.Dock="Top"
+                        Grid.Row="1"
+                        BorderBrush="{StaticResource BoxLineColorBrush}"
+                        BorderThickness="1"
+                        Background="White"
+                        CornerRadius="50"
+                        Width="100"
+                        Height="100">
+                    <local:AsyncImage 
+                            Height="96"
+                            Width="96"
+                            Stretch="UniformToFill"
+                            Source="{Binding SourceImageAva, UpdateSourceTrigger=PropertyChanged}">
+                        <local:AsyncImage.Clip>
+                            <EllipseGeometry
+                                    Center="48 48"
+                                    RadiusX="48"
+                                    RadiusY="48"/>
+                        </local:AsyncImage.Clip>
+                    </local:AsyncImage>
+                </Border>
+                <Button Width="150" Height="30" Margin="10"
+                        DockPanel.Dock="Top"
+                        VerticalAlignment="Bottom"
+                        Command="{Binding OpenBackgroundDialog}"
+                        Style="{StaticResource WhiteButton}"
+                        FontFamily="{StaticResource Regular}"
+                        Padding="0"
+                        FontSize="{StaticResource FontSizeDescription}"
+                        >
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal" >
+                            <fa:ImageAwesome
+                                    Margin="0 0 5 0"
+                                    Icon="Edit"
+                                    Height="10"
+                                    VerticalAlignment="Center"
+                                    Foreground="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"/>
+                            <TextBlock 
+                                    FontFamily="{StaticResource Light}"
+                                    Text="Edit Background"
+                                    VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button.Content>
+                    <Button.InputBindings>
+                        <MouseBinding 
+                            MouseAction="LeftDoubleClick"
+                            Command="{Binding DoubleClickCommand, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Button.InputBindings>
+                </Button>
+            </DockPanel>
+        </Grid>
+
+        <TabControl Grid.Row="1" Margin="50 20 50 20" x:Name="tabcontrol">
+            <TabItem Style="{StaticResource RadioTabItem}"
+                     Header="My Profile" Width="{c:Binding ElementName=tabcontrol, Path=ActualWidth/3}">
+                <ScrollViewer VerticalScrollBarVisibility="Hidden"
+                              PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+                    <Border Width="{c:Binding ElementName=tabcontrol, Path=ActualWidth}"
+                            Height="{c:Binding 'ActualHeight + 20',Path=tabcontrol}"
+                            Padding="1">
+                        <Grid>
+                        <local:ProfileControl 
+                            HorizontalAlignment="Stretch"/>
+                    </Grid>
+                </Border>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="My Address" Width="{c:Binding ElementName=tabcontrol, Path=ActualWidth/3}"
+                     Style="{StaticResource RadioTabItem}"
+                     Visibility="{c:Binding !IsAdmin, FalseToVisibility=Collapsed}">
+                <Grid Height="{c:Binding ElementName=tabcontrol, Path=ActualHeight-100}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <local:AddressesControl Grid.Row="0" Margin="0 0 0 20"
+                        Width="{c:Binding ElementName=tabcontrol, Path=ActualWidth*0.6}"/>
+
+                    <Grid Grid.Row="1">
+                        <Button Content="Add new address"
+                                Width="auto"
+                                Command="{Binding AddAddressCommand}"
+                                Style="{StaticResource ButtonRectangle}"/>
+                    </Grid>
+                </Grid>
+
+            </TabItem>
+
+            <TabItem Header="My Password" Width="{c:Binding ElementName=tabcontrol, Path=ActualWidth/3}"
+                     Style="{StaticResource RadioTabItem}"
+                     Visibility="{i:Binding Path=!IsGoogle, FalseToVisibility=Collapsed}">
+                <ScrollViewer VerticalScrollBarVisibility="Hidden"
+                              PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+                    <Border Width="{c:Binding ElementName=tabcontrol, Path=ActualWidth}"
+                            Height="{c:Binding 'ActualHeight + 20',Path=tabcontrol}">
+                        <local:MyPassword/>
+                    </Border>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+        <Grid.InputBindings>
+            <KeyBinding Key="Esc" Command="{Binding CancelProfileCommand}"/>
+            <KeyBinding Key="Enter" Command="{Binding SaveProfileCommand}" 
+                                CommandParameter="{Binding Path=EditUser}"/>
+        </Grid.InputBindings>
+    </Grid>
+</UserControl>

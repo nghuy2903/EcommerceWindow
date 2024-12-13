@@ -1,0 +1,1344 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{94061FB9-FAD6-44C6-9E3B-608218F8D9AB}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>WPFEcommerceApp</RootNamespace>
+    <AssemblyName>WPFEcommerceApp</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.JScript" />
+    <Reference Include="PresentationFramework.Aero2" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Components\UserControls\AsyncImage\CachedImage.cs" />
+    <Compile Include="Components\UserControls\AsyncImage\FileCache.cs" />
+    <Compile Include="Components\UserControls\CategoryRequest\DropDown.xaml.cs">
+      <DependentUpon>DropDown.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Api\PromoDetailAPI.cs" />
+    <Compile Include="Components\UserControls\Header\SearchBar\HeaderSearch.xaml.cs">
+      <DependentUpon>HeaderSearch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Address.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AdInUse.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Advertisement.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Brand.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BrandRequest.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cart.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CategoryRequest.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ImageProduct.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.Designer.cs">
+      <DependentUpon>Model.edmx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\MOrder.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MUser.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Notification.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Product.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Promo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rating.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RatingInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ShopRequest.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserLogin.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\ProductPanel.cs" />
+    <Compile Include="Screens\General\Order\components\DescriptionConverter.cs" />
+    <Compile Include="Screens\General\Payment\Checkout\VoucherFilterConverter.cs" />
+    <Compile Include="Screens\General\Payment\components\Dialogs\EditInforDialogVM.cs" />
+    <Compile Include="Screens\General\Payment\components\Dialogs\VoucherConditionDialog.xaml.cs">
+      <DependentUpon>VoucherConditionDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\ProductDetailMini\ProductDetailMini.xaml.cs">
+      <DependentUpon>ProductDetailMini.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\ProductDetail\ProductDetailBanned\ProductDetailBanned.xaml.cs">
+      <DependentUpon>ProductDetailBanned.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\ProductDetail\ProductDetailBanned\ProductDetailBannedViewModel.cs" />
+    <Compile Include="Screens\General\ProductDetail\ProductDetailNormal\ProductDetailNormal.xaml.cs">
+      <DependentUpon>ProductDetailNormal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\ProductDetail\ProductDetailNormal\ProductDetailNormalViewModel.cs" />
+    <Compile Include="Screens\Shop\ShopContact\ShopContact.xaml.cs">
+      <DependentUpon>ShopContact.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Shop\ShopContact\ShopContactViewModel.cs" />
+    <Compile Include="Screens\Shop\ShopOrder\ShopOrderBlock\OrderInfoPdf\OrderInfoPdf.xaml.cs">
+      <DependentUpon>OrderInfoPdf.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Shop\ShopOrder\ShopOrderBlock\OrderInfoPdf\OrderInfoPdfViewModel.cs" />
+    <Compile Include="Screens\Shop\ShopPromo\PromoInfomation\PromoInformation.xaml.cs">
+      <DependentUpon>PromoInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Shop\ShopPromo\PromoInfomation\PromoInformationViewModel.cs" />
+    <Compile Include="Screens\Shop\ShopPromo\ShopPromoBlock\DropdownPromoItem.xaml.cs">
+      <DependentUpon>DropdownPromoItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Admin\AdminPromo\AdminPromo.xaml.cs">
+      <DependentUpon>AdminPromo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Admin\AdminPromo\AdminPromoViewModel.cs" />
+    <Compile Include="Screens\Admin\AdsManager\AdsDialog\AdsDialogViewModel.cs" />
+    <Compile Include="Screens\General\MyProfile\Address\AddressDialog\AddAddressDialog.xaml.cs">
+      <DependentUpon>AddAddressDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\MyProfile\Address\AddressDialog\AddressDialogViewModel.cs" />
+    <Compile Include="Screens\General\MyProfile\Address\AddressesControl.xaml.cs">
+      <DependentUpon>AddressesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\MyProfile\Address\AddressItem.xaml.cs">
+      <DependentUpon>AddressItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\MyProfile\Address\AddressItemViewModel.cs" />
+    <Compile Include="Screens\General\MyProfile\MyPassword\MyPassword.xaml.cs">
+      <DependentUpon>MyPassword.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\MyProfile\ProfileControl.xaml.cs">
+      <DependentUpon>ProfileControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Shop\ShopPromo\ShopPromoBlock\DropdownPromoItem.xaml.cs">
+      <DependentUpon>DropdownPromoItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Shop\ShopPromo\AddShopPromo\AddNewProductPromo\AddProductDetailBlock\AddProductDetailBlock.xaml.cs">
+      <DependentUpon>AddProductDetailBlock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Shop\ShopPromo\AddShopPromo\AddNewProductPromo\AddNewProductPromo.xaml.cs">
+      <DependentUpon>AddNewProductPromo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Shop\ShopPromo\AddShopPromo\AddNewProductPromo\AddNewProductPromoViewModel.cs" />
+    <Compile Include="Screens\Shop\ShopPromo\AddShopPromo\AddShopPromo.xaml.cs">
+      <DependentUpon>AddShopPromo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Shop\ShopPromo\AddShopPromo\AddShopPromoViewModel.cs" />
+    <Compile Include="Api\FavouriteApi.cs" />
+    <Compile Include="Api\FireStorageAPI.cs" />
+    <Compile Include="Api\GenerateID.cs" />
+    <Compile Include="Api\Internet.cs" />
+    <Compile Include="Api\OAuth.cs" />
+    <Compile Include="Api\TaskHelper.cs" />
+    <Compile Include="Components\UserControls\AsyncImage\AsyncImage.xaml.cs">
+      <DependentUpon>AsyncImage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\DropImage\MoveThumb.cs" />
+    <Compile Include="Screens\Shop\ShopPromo\AddShopPromo\PromoProductBlock\PromoProductBlock.xaml.cs">
+      <DependentUpon>PromoProductBlock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Shop\ShopPromo\AddShopPromo\PromoProductBlock\PromoProductBlockViewModel.cs" />
+    <Compile Include="Screens\Shop\ShopPromo\AddShopPromo\PromoTypeBlock\PromoTypeBlock.xaml.cs">
+      <DependentUpon>PromoTypeBlock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Shop\ShopPromo\ShopPromo.xaml.cs">
+      <DependentUpon>ShopPromo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Shop\ShopPromo\ShopPromoBlock\ShopPromoBlock.xaml.cs">
+      <DependentUpon>ShopPromoBlock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Shop\ShopPromo\ShopPromoBlock\ShopPromoBlockViewModel.cs" />
+    <Compile Include="Screens\Shop\ShopPromo\ShopPromoViewModel.cs" />
+    <Compile Include="Screens\Shop\ShopRating\AddNewRelyBlock\AddNewReplyBlock.xaml.cs">
+      <DependentUpon>AddNewReplyBlock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Shop\ShopRating\AddNewRelyBlock\AddNewReplyBlockViewModel.cs" />
+    <Compile Include="Screens\Shop\ShopRating\ReplyBlock\ReplyBlock.xaml.cs">
+      <DependentUpon>ReplyBlock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Shop\ShopRating\ReplyBlock\ReplyBlockViewModel.cs" />
+    <Compile Include="Services\DPIService.cs" />
+    <Compile Include="Services\INavigationService.cs" />
+    <Compile Include="Services\NavigateProvider.cs" />
+    <Compile Include="Services\NavigateService.cs" />
+    <Compile Include="Services\ParamNavigationService.cs" />
+    <Compile Include="Screens\Auth\ForgotPassword\ForgotPasswordVM.cs" />
+    <Compile Include="Api\Hashing.cs" />
+    <Compile Include="Screens\General\Payment\components\Dialogs\AddressChoiceDialog.xaml.cs">
+      <DependentUpon>AddressChoiceDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\Payment\components\Dialogs\AddressChoiceDialogVM.cs" />
+    <Compile Include="Utils\Converters\DoubleToCurrencyConverter.cs" />
+    <Compile Include="Utils\IsLoadingCheck.cs" />
+    <Compile Include="Screens\General\Filter\BrandCheckViewModel.cs" />
+    <Compile Include="Screens\General\Filter\CategoryCheckBoxViewModel.cs" />
+    <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\Model.Designer.cs">
+      <DependentUpon>Model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\Product.cs" />
+    <Compile Include="DTO\Order.cs" />
+    <Compile Include="DTO\Status.cs" />
+    <Compile Include="Screens\Admin\AdminBrand\AdminBrandManager.xaml.cs">
+      <DependentUpon>AdminBrandManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Admin\AdminBrand\AdminBrandViewModel.cs" />
+    <Compile Include="Screens\Admin\AdminCategory\AdminCategoryManager.xaml.cs">
+      <DependentUpon>AdminCategoryManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Admin\AdminCategory\AdminCategoryViewModel.cs" />
+    <Compile Include="Screens\Admin\AdminProduct\AdminProductInformation.xaml.cs">
+      <DependentUpon>AdminProductInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Admin\AdminProduct\AdminProductManagerViewModel.cs" />
+    <Compile Include="Screens\Admin\AdminShopInformation\ShopInformationPage.xaml.cs">
+      <DependentUpon>ShopInformationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Admin\AdminShopInformation\ShopInformationPageViewModel.cs" />
+    <Compile Include="Screens\Admin\AdminUserInformation\AdminUserInformation.xaml.cs">
+      <DependentUpon>AdminUserInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Admin\AdminUserInformation\AdminUserManagerViewModel.cs" />
+    <Compile Include="Screens\Admin\AdsManager\AdsItem.xaml.cs">
+      <DependentUpon>AdsItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Admin\AdsManager\AdsManager.xaml.cs">
+      <DependentUpon>AdsManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Admin\AdsManager\AdsManagerViewModel.cs" />
+    <Compile Include="Screens\General\Bag\Bag.xaml.cs">
+      <DependentUpon>Bag.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\Bag\BagBlock.cs" />
+    <Compile Include="Screens\General\Bag\BagBlockUC.xaml.cs">
+      <DependentUpon>BagBlockUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\Bag\BagViewModel.cs" />
+    <Compile Include="Screens\General\Favorite\Favorite.xaml.cs">
+      <DependentUpon>Favorite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\Favorite\FavoriteViewModel.cs" />
+    <Compile Include="Screens\Auth\ForgotPassword\ForgotPassword.xaml.cs">
+      <DependentUpon>ForgotPassword.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\Filter\Filter.xaml.cs">
+      <DependentUpon>Filter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\Filter\FilterViewModel.cs" />
+    <Compile Include="Screens\Auth\Login\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Auth\Login\LoginViewModel.cs" />
+    <Compile Include="Screens\General\MyHome\MyHome.xaml.cs">
+      <DependentUpon>MyHome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\MyHome\MyHomeViewModel.cs" />
+    <Compile Include="Screens\General\MyProfile\MyProfile.xaml.cs">
+      <DependentUpon>MyProfile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\MyProfile\MyProfileViewModel.cs" />
+    <Compile Include="Screens\General\Notification\Notification.xaml.cs">
+      <DependentUpon>Notification.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\Notification\NotificationBlock.cs" />
+    <Compile Include="Screens\General\Notification\NotificationBlockUC.xaml.cs">
+      <DependentUpon>NotificationBlockUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\Notification\NotificationViewModel.cs" />
+    <Compile Include="Screens\General\ProductDetail\ProductDetail.xaml.cs">
+      <DependentUpon>ProductDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\ProductDetail\ProductDetailViewModel.cs" />
+    <Compile Include="Screens\Auth\Register\Register.xaml.cs">
+      <DependentUpon>Register.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Auth\Register\RegisterViewModel.cs" />
+    <Compile Include="Screens\Main\NoInternetScreen\OfflineScreen.xaml.cs">
+      <DependentUpon>OfflineScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Main\NoInternetScreen\OfflineScreenVM.cs" />
+    <Compile Include="Screens\Shop\ShopMain\ProductBlockByCategory\ProductBlockByCategory.xaml.cs">
+      <DependentUpon>ProductBlockByCategory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Shop\ShopMain\ProductBlockByCategory\ProductBlockByCategoryViewModel.cs" />
+    <Compile Include="Screens\Shop\ShopOrder\ChooseShippingMethodDialog\ChooseShippingMethodDialog.xaml.cs">
+      <DependentUpon>ChooseShippingMethodDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Shop\ShopOrder\ChooseShippingMethodDialog\ChooseShippingMethodDialogViewModel.cs" />
+    <Compile Include="Screens\Shop\ShopOrder\ShopOrderBlock\ShopOrderBlock.xaml.cs">
+      <DependentUpon>ShopOrderBlock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Shop\ShopOrder\ShopOrderBlock\ShopOrderBlockViewModel.cs" />
+    <Compile Include="Screens\Shop\ShopOrder\ShopOrderDetailBlock\ShopOrderDetailBlock.xaml.cs">
+      <DependentUpon>ShopOrderDetailBlock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Shop\ShopOrder\ShopOrderDetailBlock\ShopOrderDetailBlockViewModel.cs" />
+    <Compile Include="Screens\Shop\ShopOrder\ShopOrderViewModel.cs" />
+    <Compile Include="Screens\Shop\ShopRating\ShopRatingBlock.xaml.cs">
+      <DependentUpon>ShopRatingBlock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Shop\ShopRating\ShopRatingBlockModel.cs" />
+    <Compile Include="Screens\Shop\ShopStatistics\Charts.xaml.cs">
+      <DependentUpon>Charts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Shop\ShopStatistics\ShopStatisticsViewModel.cs" />
+    <Compile Include="Screens\Shop\ShopView\ShopView.xaml.cs">
+      <DependentUpon>ShopView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Shop\ShopView\ShopViewViewModel.cs" />
+    <Compile Include="Screens\Main\SplashScreen\SplashScreen.xaml.cs">
+      <DependentUpon>SplashScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Main\SplashScreen\SplashScreenVM.cs" />
+    <Compile Include="Screens\Shop\UnShopMain\BannedShopViewModel.cs" />
+    <Compile Include="Screens\Shop\UnShopMain\NotRegisterShopViewModel.cs" />
+    <Compile Include="Screens\Shop\UnShopMain\UnShopMain.xaml.cs">
+      <DependentUpon>UnShopMain.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\BrandRequest\BrandRequestItem.xaml.cs">
+      <DependentUpon>BrandRequestItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\BrandRequest\BrandRequestItemViewModel.cs" />
+    <Compile Include="Components\UserControls\BrandRequest\BrandRequestList.xaml.cs">
+      <DependentUpon>BrandRequestList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\BrandRequest\BrandRequestListViewModel.cs" />
+    <Compile Include="Components\UserControls\CategoryRequest\CategoryRequestItem.xaml.cs">
+      <DependentUpon>CategoryRequestItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\CategoryRequest\CategoryRequestItemViewModel.cs" />
+    <Compile Include="Components\UserControls\CategoryRequest\CategoryRequestList.xaml.cs">
+      <DependentUpon>CategoryRequestList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\CategoryRequest\CategoryRequestListViewModel.cs" />
+    <Compile Include="Screens\General\Order\components\Dialog\ReviewProductDialog.xaml.cs">
+      <DependentUpon>ReviewProductDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Admin\AdsManager\AdsDialog\AddAdsDialog.xaml.cs">
+      <DependentUpon>AddAdsDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\Dialogs\AddBrandDialog\AddBrandDialog.xaml.cs">
+      <DependentUpon>AddBrandDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\Dialogs\AddProductDialog\AddProductDialogViewModel.cs" />
+    <Compile Include="Components\UserControls\Dialogs\AddProductDialog\SizeBlock.xaml.cs">
+      <DependentUpon>SizeBlock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\Dialogs\AdminAddBrandDialog.xaml.cs">
+      <DependentUpon>AdminAddBrandDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\Dialogs\AdminAddCategoryDialog.xaml.cs">
+      <DependentUpon>AdminAddCategoryDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\Dialogs\AdminAddUserDialog.xaml.cs">
+      <DependentUpon>AdminAddUserDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\Dialogs\ChangeImageProductDialog\ChangeImageProductDialog.xaml.cs">
+      <DependentUpon>ChangeImageProductDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\Dialogs\ChangeImageProductDialog\ChangeImageProductDialogViewModel.cs" />
+    <Compile Include="Components\UserControls\Dialogs\ConfirmDialog.xaml.cs">
+      <DependentUpon>ConfirmDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\Dialogs\NotificationDialog.xaml.cs">
+      <DependentUpon>NotificationDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\Dialogs\ProductInfoLanscape\ProductInfoLanscape.xaml.cs">
+      <DependentUpon>ProductInfoLanscape.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\Dialogs\ProductInfoLanscape\ProductInfoLanscapeViewModel.cs" />
+    <Compile Include="Components\UserControls\Dialogs\ProductInfoPortraitBanned\ProductInfoPortraitBanned.xaml.cs">
+      <DependentUpon>ProductInfoPortraitBanned.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\Dialogs\ProductInfoPortraitBanned\ProductInfoPortraitBannedViewModel.cs" />
+    <Compile Include="Components\UserControls\Dialogs\ProductInfoPortrait\ProductInfoPortrait.xaml.cs">
+      <DependentUpon>ProductInfoPortrait.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\Dialogs\ProductInfoPortrait\ProductInfoPortraitViewModel.cs" />
+    <Compile Include="Components\UserControls\Dialogs\ProfileShopAvaDialog\ProfileShopAvaDialog.xaml.cs">
+      <DependentUpon>ProfileShopAvaDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\Dialogs\ProfileShopAvaDialog\ProfileShopAvaDialogViewModel.cs" />
+    <Compile Include="Components\UserControls\Dialogs\ProfileShopBackgroundDialog\ProfileShopBackgroundDialog.xaml.cs">
+      <DependentUpon>ProfileShopBackgroundDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\Dialogs\ProfileShopBackgroundDialog\ProfileShopBackgroundDialogViewModel.cs" />
+    <Compile Include="Components\UserControls\Dialogs\ProfileShopDialog\ProfileShopDialog.xaml.cs">
+      <DependentUpon>ProfileShopDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\Dialogs\ProfileShopDialog\ProfileShopDialogViewModel.cs" />
+    <Compile Include="Components\UserControls\Dialogs\RegisterShopDialog\RegisterShopDialog.xaml.cs">
+      <DependentUpon>RegisterShopDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\Dialogs\RegisterShopDialog\RegisterShopDialogViewModel.cs" />
+    <Compile Include="Components\UserControls\Dialogs\ShopRequestInformationDialog.xaml.cs">
+      <DependentUpon>ShopRequestInformationDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\Drawer\ShopPopUp.xaml.cs">
+      <DependentUpon>ShopPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\Drawer\ShopPopUpVM.cs" />
+    <Compile Include="Components\UserControls\Loading\LoadingScreen.xaml.cs">
+      <DependentUpon>LoadingScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\ProductBlock\ImageProduct.cs" />
+    <Compile Include="Components\UserControls\ProductBlock\ProductBlock.xaml.cs">
+      <DependentUpon>ProductBlock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\RatingBar\RatingBar.xaml.cs">
+      <DependentUpon>RatingBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\ShopRequest\ShopRequestItem.xaml.cs">
+      <DependentUpon>ShopRequestItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\ShopRequest\ShopRequestItemViewModel.cs" />
+    <Compile Include="Components\UserControls\ShopRequest\ShopRequestList.xaml.cs">
+      <DependentUpon>ShopRequestList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\ShopRequest\ShopRequestListViewModel.cs" />
+    <Compile Include="Components\UserControls\UserIconControl\UserIconControl.xaml.cs">
+      <DependentUpon>UserIconControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Stores\FavoriteStore.cs" />
+    <Compile Include="Utils\Converters\BooleanToGenderConverter.cs" />
+    <Compile Include="Components\UserControls\WindowControlBar\WindowControlBar.xaml.cs">
+      <DependentUpon>WindowControlBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\WindowControlBar\WindowControlBarVM.cs" />
+    <Compile Include="Utils\Converters\DateTimeToShortConverter.cs" />
+    <Compile Include="Utils\Converters\FalsesToTrueConverter.cs" />
+    <Compile Include="Utils\Converters\MultiValueConverter.cs" />
+    <Compile Include="Utils\Converters\NumberToBooleanConverter.cs" />
+    <Compile Include="Utils\Converters\ProdcutInfoConverter.cs" />
+    <Compile Include="Utils\Converters\ScrollViewerShopMainConverter.cs" />
+    <Compile Include="Utils\Converters\StringToImageSourceConverter.cs" />
+    <Compile Include="Utils\Converters\TrueFromBooleansToFalseConverter.cs" />
+    <Compile Include="DataAccessLayer\DbContextExtensions.cs" />
+    <Compile Include="DataAccessLayer\GenericDataRepository.cs" />
+    <Compile Include="DataAccessLayer\IGenericDataRepository.cs" />
+    <Compile Include="Screens\General\Order\Command\ReOrderCM.cs" />
+    <Compile Include="Screens\General\Order\components\OrderCard.xaml.cs">
+      <DependentUpon>OrderCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\Order\components\ProductDetailShopCard.xaml.cs">
+      <DependentUpon>ProductDetailShopCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\Order\components\ProductOrderCard.xaml.cs">
+      <DependentUpon>ProductOrderCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\Order\components\StatusDetailLabel.xaml.cs">
+      <DependentUpon>StatusDetailLabel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\Order\OrderScreen.xaml.cs">
+      <DependentUpon>OrderScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\Order\OrderScreenVM.cs" />
+    <Compile Include="Screens\General\Order\OrderDetails\OrderDetails.xaml.cs">
+      <DependentUpon>OrderDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\Order\OrderDetails\OrderDetailsVM.cs" />
+    <Compile Include="Screens\General\Payment\Checkout\CheckoutScreen.xaml.cs">
+      <DependentUpon>CheckoutScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\Payment\Checkout\CheckoutScreenVM.cs" />
+    <Compile Include="Screens\General\Payment\components\Dialogs\EditInforDialog.xaml.cs">
+      <DependentUpon>EditInforDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\ImmediateCommand.cs" />
+    <Compile Include="Utils\ValidationRule\Wrapper.cs" />
+    <Compile Include="Utils\ValidationRule\EmailValidateRule.cs" />
+    <Compile Include="Utils\ValidationRule\PasswordValidateRule.cs" />
+    <Compile Include="Utils\ValidationRule\PhoneValidateRule.cs" />
+    <Compile Include="Screens\General\Payment\components\ProductCard\BProductCard.xaml.cs">
+      <DependentUpon>BProductCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\Payment\SuccessScreen\SuccessScreen.xaml.cs">
+      <DependentUpon>SuccessScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\General\Payment\SuccessScreen\SuccessScreenVM.cs" />
+    <Compile Include="Screens\Shop\ShopProduct\ShopProduct.xaml.cs">
+      <DependentUpon>ShopProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Main\MainViewModel.cs" />
+    <Compile Include="Stores\AccountStore.cs" />
+    <Compile Include="Stores\NavigationStore.cs" />
+    <Compile Include="Stores\OrderStore.cs" />
+    <Compile Include="Components\UserControls\Dialogs\AddBrandDialog\AddBrandDialogViewModel.cs" />
+    <Compile Include="Components\UserControls\Dialogs\AddCategoryDialog\AddCategoryDialog.xaml.cs">
+      <DependentUpon>AddCategoryDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\Dialogs\AddCategoryDialog\AddCategoryViewModel.cs" />
+    <Compile Include="Components\UserControls\Dialogs\AddProductDialog\AddProductDialog.xaml.cs">
+      <DependentUpon>AddProductDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\Drawer\Drawer.xaml.cs">
+      <DependentUpon>Drawer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\Drawer\DrawerVM.cs" />
+    <Compile Include="Components\UserControls\Header\Header.xaml.cs">
+      <DependentUpon>Header.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\Header\HeaderViewModel.cs" />
+    <Compile Include="Components\UserControls\Header\SearchBar\DropDownSearchBar.xaml.cs">
+      <DependentUpon>DropDownSearchBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\Header\SearchBar\KeyboardFocus.cs" />
+    <Compile Include="Components\UserControls\Header\SearchBar\SearchBar.xaml.cs">
+      <DependentUpon>SearchBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\Header\SearchItem.xaml.cs">
+      <DependentUpon>SearchItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserControls\Header\SearchItemViewModel.cs" />
+    <Compile Include="MainItem.cs" />
+    <Compile Include="DTO\Shop.cs" />
+    <Compile Include="Screens\Shop\ShopOrder\ShopOrder.xaml.cs">
+      <DependentUpon>ShopOrder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Shop\ShopMain\ShopMainViewModel.cs" />
+    <Compile Include="Screens\Shop\ShopMain\ShopMain.xaml.cs">
+      <DependentUpon>ShopMain.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Shop\ShopRating\ShopRating.xaml.cs">
+      <DependentUpon>ShopRating.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Shop\ShopProduct\ShopProductViewModel.cs" />
+    <Compile Include="Components\UserControls\ProductBlock\ProductBlockViewModel.cs" />
+    <Compile Include="Utils\BaseViewModel.cs" />
+    <Compile Include="Utils\CommandBase.cs" />
+    <Compile Include="Utils\CreateViewModel.cs" />
+    <Compile Include="Utils\IAsyncInitialization.cs" />
+    <Compile Include="Utils\RelayCommand.cs" />
+    <Compile Include="Screens\Shop\ShopRating\ShopRatingViewModel.cs" />
+    <Compile Include="Utils\RelayCommandWithNoParameter.cs" />
+    <Compile Include="Utils\ValidationRule\NotEmptyValidationRule.cs" />
+    <Compile Include="Utils\ValidationRule\NumberTextBoxValidation.cs" />
+    <Compile Include="Utils\ValidationRule\PromoCodeValidation.cs" />
+    <Compile Include="Utils\ValidationRule\ValidateRegex.cs" />
+    <Page Include="Components\UserControls\CategoryRequest\DropDown.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\Header\SearchBar\HeaderSearch.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\Admin\AdminPromo\AdminPromo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\General\MyProfile\Address\AddressDialog\AddAddressDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\General\MyProfile\Address\AddressesControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\General\MyProfile\Address\AddressItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\General\MyProfile\MyPassword\MyPassword.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\General\MyProfile\ProfileControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\General\Payment\components\Dialogs\VoucherConditionDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\General\ProductDetailMini\ProductDetailMini.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\General\ProductDetail\ProductDetailBanned\ProductDetailBanned.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\General\ProductDetail\ProductDetailNormal\ProductDetailNormal.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\Shop\ShopContact\ShopContact.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Shop\ShopOrder\ShopOrderBlock\OrderInfoPdf\OrderInfoPdf.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Shop\ShopPromo\PromoInfomation\PromoInformation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Shop\ShopPromo\ShopPromoBlock\DropdownPromoItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Shop\ShopPromo\AddShopPromo\AddNewProductPromo\AddProductDetailBlock\AddProductDetailBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Shop\ShopPromo\AddShopPromo\AddNewProductPromo\AddNewProductPromo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Shop\ShopPromo\AddShopPromo\AddShopPromo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Buttons\ButtonRectangle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Buttons\DefaultButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Buttons\OutlineBlackButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Buttons\OutLineBlackButtonRectangle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Buttons\Pressable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Buttons\RadioButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Buttons\RadioButtonOutlineCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Buttons\TransparentButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Buttons\WhiteButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Buttons\WhiteButtonRectangle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\ComboBoxes\ComboBoxes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\ComboBoxes\ComboBoxTransparentBorder.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\Datagrid\Datagrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\DatePickers\DatePickers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\ListView\ListItemContainer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\ListView\ListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\RadioButtons\RadioButtonFill.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\RadioButtons\RadioButtons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\RadioButtons\RadioTabButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\Scroll.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\TabControls\DefaultTabControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\TabItems\TabItems.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\TextBoxes\PasswordBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\TextBoxes\TextBoxHintBlackBorder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\TextBoxes\TextBoxHintTransparentBorder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\TextBoxes\TextBoxHintWrapText.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\ToggleButtons\SwitchToggleButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\ToggleButtons\ToggleButtons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\UserControls\AsyncImage\AsyncImage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Admin\AdminBrand\AdminBrandManager.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\Admin\AdminCategory\AdminCategoryManager.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\Admin\AdminProduct\AdminProductInformation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\Admin\AdminShopInformation\ShopInformationPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\General\Bag\Bag.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\General\Bag\BagBlockUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\General\Favorite\Favorite.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\Auth\ForgotPassword\ForgotPassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Admin\AdminUserInformation\AdminUserInformation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\Admin\AdsManager\AdsItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Admin\AdsManager\AdsManager.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\General\Filter\Filter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\Auth\Login\Login.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\General\MyHome\MyHome.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\General\MyProfile\MyProfile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\General\Order\components\Dialog\ReviewProductDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\General\Notification\Notification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\General\Notification\NotificationBlockUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\General\Order\components\OrderCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\General\Order\components\ProductDetailShopCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\General\Order\components\ProductOrderCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\General\Order\components\StatusDetailLabel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\General\Order\OrderScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\General\Order\OrderDetails\OrderDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\General\Payment\Checkout\CheckoutScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\General\Payment\components\Dialogs\AddressChoiceDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\General\Payment\components\Dialogs\EditInforDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\General\Payment\components\HiddenTab\Expander.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\General\Payment\components\ProductCard\BProductCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\General\Payment\SuccessScreen\SuccessScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\General\ProductDetail\ProductDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Auth\Register\Register.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Main\NoInternetScreen\OfflineScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Shop\ShopMain\ProductBlockByCategory\ProductBlockByCategory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\Shop\ShopOrder\ChooseShippingMethodDialog\ChooseShippingMethodDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\Shop\ShopOrder\ShopOrderBlock\ShopOrderBlock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\Shop\ShopOrder\ShopOrderDetailBlock\ShopOrderDetailBlock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\Shop\ShopProduct\ShopProduct.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\Shop\ShopPromo\AddShopPromo\PromoProductBlock\PromoProductBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Shop\ShopPromo\AddShopPromo\PromoTypeBlock\PromoTypeBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Shop\ShopPromo\ShopPromo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Shop\ShopPromo\ShopPromoBlock\ShopPromoBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Shop\ShopRating\AddNewRelyBlock\AddNewReplyBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Shop\ShopRating\ReplyBlock\ReplyBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Shop\ShopRating\ShopRatingBlock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\Shop\ShopStatistics\Charts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\Shop\ShopView\ShopView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\Main\SplashScreen\SplashScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Screens\Shop\UnShopMain\UnShopMain.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\Main\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Screens\Main\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Screens\Main\ScreensDT.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\UserControls\BrandRequest\BrandRequestItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\BrandRequest\BrandRequestList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\CategoryRequest\CategoryRequestItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\CategoryRequest\CategoryRequestList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\Admin\AdsManager\AdsDialog\AddAdsDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\Dialogs\AddBrandDialog\AddBrandDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\Dialogs\AddCategoryDialog\AddCategoryDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\Dialogs\AddProductDialog\AddProductDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\Dialogs\AddProductDialog\SizeBlock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\Dialogs\AdminAddBrandDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\Dialogs\AdminAddCategoryDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\Dialogs\AdminAddUserDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\Dialogs\ChangeImageProductDialog\ChangeImageProductDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\Dialogs\ConfirmDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\Dialogs\NotificationDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\Dialogs\ProductInfoLanscape\ProductInfoLanscape.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\Dialogs\ProductInfoPortraitBanned\ProductInfoPortraitBanned.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\Dialogs\ProductInfoPortrait\ProductInfoPortrait.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\Dialogs\ProfileShopAvaDialog\ProfileShopAvaDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\Dialogs\ProfileShopBackgroundDialog\ProfileShopBackgroundDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\Dialogs\ProfileShopDialog\ProfileShopDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\Dialogs\RegisterShopDialog\RegisterShopDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\Dialogs\ShopRequestInformationDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\Drawer\Drawer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\Drawer\ShopPopUp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\UserControls\Header\Header.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\Header\SearchBar\DropDownSearchBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\Header\SearchBar\SearchBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\Header\SearchItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\Shop\ShopMain\ShopMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Shop\ShopOrder\ShopOrder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Shop\ShopRating\ShopRating.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Buttons\Buttons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\ComboBoxes\DefaultComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Datagrid\DefaultDatagrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\DatePickers\OurDatePicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Constants\Fonts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Components\TabControls\TabControls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\TabItems\DefaultTabItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\ToggleButtons\ToggleButtonSize.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Constants\Colors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\TextBoxes\TextBoxes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\UserControls\Loading\LoadingScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\UserControls\ProductBlock\ProductBlock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\RatingBar\RatingBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\UserControls\ShopRequest\ShopRequestItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\ShopRequest\ShopRequestList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\UserIconControl\UserIconControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\UserControls\WindowControlBar\WindowControlBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Resource Include="Assets\Fonts\HelveticaNeue.otf" />
+    <Resource Include="Assets\Fonts\HelveticaNeueBold.ttf" />
+    <Resource Include="Assets\Fonts\HelveticaNeueBoldItalic.ttf" />
+    <Resource Include="Assets\Fonts\HelveticaNeueItalic.otf" />
+    <Resource Include="Assets\Fonts\HelveticaNeueLight.ttf" />
+    <Resource Include="Assets\Fonts\HelveticaNeueLightItalic.otf" />
+    <Resource Include="Assets\Fonts\HelveticaNeueMedium.otf" />
+    <Resource Include="Assets\Fonts\HelveticaNeueUltraLight.ttf" />
+    <Resource Include="Assets\Fonts\HelveticaNeueUltraLightItalic.otf" />
+    <None Include="FodyWeavers.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="Models\Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\SuccessBag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="FodyWeavers.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CalcBinding">
+      <Version>2.5.2</Version>
+    </PackageReference>
+    <PackageReference Include="EntityFramework">
+      <Version>6.4.4</Version>
+    </PackageReference>
+    <PackageReference Include="FirebaseStorage.net">
+      <Version>1.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="FontAwesome.WPF">
+      <Version>4.7.0.9</Version>
+    </PackageReference>
+    <PackageReference Include="LiveCharts.Wpf">
+      <Version>0.9.7</Version>
+    </PackageReference>
+    <PackageReference Include="MaterialDesignThemes">
+      <Version>4.6.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection">
+      <Version>7.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf">
+      <Version>1.1.39</Version>
+    </PackageReference>
+    <PackageReference Include="PropertyChanged.Fody">
+      <Version>4.1.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\img_CoverHolder.jpg" />
+    <Resource Include="Assets\Images\MagicBox.png" />
+    <Content Include="Screens\Auth\ForgotPassword\email.html" />
+    <Resource Include="Assets\Icon\icon_facebook.png" />
+    <Resource Include="Assets\Icon\icon_github.png" />
+    <Resource Include="Assets\Icon\icon_instagram.png" />
+    <Resource Include="Assets\Images\img_Boarding.jpg" />
+    <Resource Include="Assets\Icon\icon_google.png" />
+    <Content Include="Models\Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+    <Resource Include="Assets\Sounds\LoadingSound.mp3" />
+    <Resource Include="Assets\Icon\Home.png" />
+    <Resource Include="Assets\Images\Offline.png" />
+    <Resource Include="Assets\Images\NoImage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

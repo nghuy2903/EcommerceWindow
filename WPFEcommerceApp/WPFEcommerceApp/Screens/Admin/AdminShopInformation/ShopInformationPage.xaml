@@ -1,0 +1,106 @@
+﻿<UserControl x:Class="WPFEcommerceApp.ShopInformationPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFEcommerceApp"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" 
+             d:DesignHeight="1500" d:DesignWidth="1440"
+             xmlns:c="clr-namespace:CalcBinding;assembly=CalcBinding"
+             x:Name="yeh"
+            >
+    <materialDesign:DialogHost Identifier="show">
+
+        <Grid Margin="0 0 0 20">
+
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" 
+                          CanContentScroll="True" 
+                          Background="{StaticResource WhiteColorBrush}"
+                          PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+                <DockPanel Margin="50 20">
+                    <DockPanel DockPanel.Dock="Top">
+                        <TextBlock Text="Shops Information"
+                                   FontFamily="{StaticResource Bold}"
+                                   FontSize="{StaticResource FontSizeHeadline}"
+                                   />
+
+                        <Button DockPanel.Dock="Right" Margin="0 0 5 0"
+                                Content="{Binding RemoveOrUnBanned}"
+                        Command="{Binding RemoveShopCommand}"
+                        CommandParameter="{Binding ElementName=datagrid, Path=SelectedItem}"/>
+
+                        <!-- Search bar -->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                            <local:SearchBar Width="400" SearchText="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+                            <ComboBox Margin="5 0" SelectedItem="{Binding SearchBy, UpdateSourceTrigger=PropertyChanged}"
+                            Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                            materialDesign:HintAssist.Hint="Search by" ItemsSource="{Binding SearchByOptions}"
+                            materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BlackColorBrush}"
+                            materialDesign:HintAssist.Foreground="{StaticResource BlackColorBrush}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding SearchCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ComboBox>
+                        </StackPanel>
+                    </DockPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Top">
+                        <TextBlock Text="{Binding StatusText}" Margin="5 15 5 0"
+                           FontSize="{StaticResource FontSizeText}"/>
+
+                        <ToggleButton Margin="5 15 5 0"
+                          Style="{StaticResource SwitchToggleButton}"
+                          Background="{StaticResource BlackColorBrush}"
+                          materialDesign:ToggleButtonAssist.SwitchTrackOnBackground="{StaticResource BlackColorBrush}"
+                          IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+
+                    <DataGrid DockPanel.Dock="Top" ItemsSource="{Binding FilteredShops, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" Margin="0 10 0 0" x:Name="datagrid"
+                      AutoGenerateColumns="False" Height="650" CanUserDeleteRows="False"
+                      IsReadOnly="True" CanUserAddRows="False" CanUserReorderColumns="False"
+                      SelectedItem="{Binding DatagridSelectedItem, UpdateSourceTrigger=PropertyChanged}"
+                      >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Width="Auto" MaxWidth="400" MinWidth="100" Binding="{Binding Id}"/>
+                            <DataGridTextColumn Header="Shop Name" Width="Auto" MaxWidth="600" MinWidth="200" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Description" Width="*" MaxWidth="1000" MinWidth="200" Binding="{Binding Description}"/>
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+
+                    <TextBlock DockPanel.Dock="Top" Text="Shop Requests" Margin="0 20"
+                               FontFamily="{StaticResource Bold}"
+                               FontSize="{StaticResource FontSizeHeadline}"
+                                   />
+                    <StackPanel>
+                        <Grid DockPanel.Dock="Top">
+                            <local:ShopRequestList Margin="0 20"/>
+
+                            <TextBlock Text="No request"
+                                   Margin="20 40 40 40"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   FontSize="{StaticResource FontSizeHeadline2}"
+                                   Visibility="{c:Binding '(RequestList.Items.Count==0)', FalseToVisibility=Collapsed}"/>
+
+                        </Grid>
+                    </StackPanel>
+                   
+                    <DockPanel.InputBindings>
+                        <KeyBinding Key="Enter"
+                            Command="{Binding SearchCommand}"/>
+                        <KeyBinding Key="Esc"
+                            Command="{Binding CloseSearchCommand}"/>
+                    </DockPanel.InputBindings>
+                </DockPanel>
+            </ScrollViewer>
+        </Grid>
+
+    </materialDesign:DialogHost>
+
+</UserControl>

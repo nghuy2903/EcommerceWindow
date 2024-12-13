@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="WPFEcommerceApp.NotificationBlockUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFEcommerceApp"
+             mc:Ignorable="d"
+             x:Name="notificationBlock">
+    <Border
+        Height="100"
+        BorderBrush="{StaticResource WhiteColorBrush}"
+        BorderThickness="0,0,0,1"
+        Padding="20,5">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Border
+            ClipToBounds="True"
+            Width="80"
+            Height="80"
+            CornerRadius="40"
+            Background="{StaticResource WhiteColorBrush}">
+                <local:AsyncImage
+                Stretch="Fill"
+                Height="80"
+                Width="80"
+                Source="{Binding ElementName=notificationBlock,UpdateSourceTrigger=PropertyChanged, Path=AvaImage}">
+                    <local:AsyncImage.Clip>
+                        <EllipseGeometry
+                        Center="40 40"
+                        RadiusX="40"
+                        RadiusY="40"/>
+                    </local:AsyncImage.Clip>
+                </local:AsyncImage>
+            </Border>
+            <Grid Grid.Column="1"
+              Margin="30,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0"
+                       Text="{Binding UserName, ElementName=notificationBlock, UpdateSourceTrigger=PropertyChanged}"
+                       VerticalAlignment="Center"
+                       FontSize="{StaticResource FontSizeHeadline3}"/>
+                <TextBlock Grid.Row="1"
+                       Margin="0,5,0,0"
+                       VerticalAlignment="Center"
+                       FontSize="{StaticResource FontSizeDescription}"
+                       Foreground="{StaticResource NotAvailableColorBrush}"
+                       Text="{Binding NotificationContent, ElementName=notificationBlock, UpdateSourceTrigger=PropertyChanged}">
+
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0"
+                   Text="{Binding Date, ElementName=notificationBlock, UpdateSourceTrigger=PropertyChanged}"
+                   Margin="20,0,0,0"
+                   VerticalAlignment="Center"
+                   FontSize="{StaticResource FontSizeDescription}"
+                   Foreground="{StaticResource NotAvailableColorBrush}">
+
+                </TextBlock>
+            </Grid>
+
+        </Grid>
+    </Border>
+</UserControl>

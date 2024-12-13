@@ -1,0 +1,114 @@
+﻿<UserControl x:Class="WPFEcommerceApp.AdminBrandManager"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFEcommerceApp"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:c="clr-namespace:CalcBinding;assembly=CalcBinding"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             mc:Ignorable="d" 
+             d:DesignHeight="1500" d:DesignWidth="1440"
+            >
+    <Grid Margin="0 0 0 20">
+
+        <ScrollViewer VerticalScrollBarVisibility="Hidden" x:Name="scroll"
+                      CanContentScroll="True" 
+                      Background="{StaticResource WhiteColorBrush}"
+                      PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+            <DockPanel Margin="50 20" LastChildFill="False">
+                <DockPanel DockPanel.Dock="Top">
+                    <TextBlock Text="Brands"
+                                   FontFamily="{StaticResource Bold}"
+                                   FontSize="{StaticResource FontSizeHeadline}"
+                                   />
+                    <Button DockPanel.Dock="Right"
+                                Content="Add"
+                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
+                        <Button.CommandParameter>
+                            <local:AdminAddBrandDialog/>
+                        </Button.CommandParameter>
+                    </Button>
+
+                    <Button DockPanel.Dock="Right" Margin="0 0 5 0"
+                                Content="{Binding RemoveOrRestore}"
+                        Command="{Binding RemoveBrandCommand}"
+                        CommandParameter="{Binding ElementName=datagrid, Path=SelectedItem}"/>
+
+                    <!-- Search bar -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                        <local:SearchBar x:Name="searchbar" Width="400" SearchText="{Binding SearchText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                        <ComboBox Margin="5 0" SelectedItem="{Binding SearchBy, UpdateSourceTrigger=PropertyChanged}"
+                              ItemsSource="{Binding SearchByOptions}"
+                            Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                            materialDesign:HintAssist.Hint="Search by"
+                            materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BlackColorBrush}"
+                            materialDesign:HintAssist.Foreground="{StaticResource BlackColorBrush}"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding SearchCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ComboBox>
+                    </StackPanel>
+                </DockPanel>
+
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBlock Text="{Binding StatusText}" Margin="5 15 5 0"
+                           FontSize="{StaticResource FontSizeText}"/>
+
+                    <ToggleButton Margin="5 15 5 0"
+                Style="{StaticResource SwitchToggleButton}"
+                          Background="{StaticResource BlackColorBrush}"
+                          materialDesign:ToggleButtonAssist.SwitchTrackOnBackground="{StaticResource BlackColorBrush}"
+                          IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+
+                <DataGrid DockPanel.Dock="Top" Margin="0 10 0 0"
+                              ItemsSource="{Binding FilteredBrands}" x:Name="datagrid"
+                               IsReadOnly="True" CanUserAddRows="False"
+                              Height="650"
+                              CanUserReorderColumns="False" CanUserDeleteRows="False"
+                              AutoGenerateColumns="False"
+                              ScrollViewer.CanContentScroll="True"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      SelectedItem="{Binding SelectedItem}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Width="200" MaxWidth="200" MinWidth="100" Binding="{Binding Id}" SortDirection="Ascending"/>
+                        <DataGridTextColumn Header="Name" Width="*" MinWidth="500" Binding="{Binding Name}" SortDirection="Ascending"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <TextBlock DockPanel.Dock="Top" Text="Brand Requests"
+                        Margin="0 20 0 20"
+                        FontFamily="{StaticResource Bold}"
+                        FontSize="{StaticResource FontSizeHeadline}"
+                                   />
+                <Grid DockPanel.Dock="Top">
+                    <local:BrandRequestList Margin="0 10"
+                                            MaxWidth="{c:Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:AdminBrandManager}}"/>
+
+                    <TextBlock Text="No request"
+                                   Margin="10"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   FontSize="{StaticResource FontSizeHeadline2}"
+                                   Visibility="{c:Binding '(RequestList.Items.Count==0)', FalseToVisibility=Collapsed}"/>
+
+                </Grid>
+                <DockPanel.InputBindings>
+                    <KeyBinding Key="Enter"
+                            Command="{Binding SearchCommand}"/>
+                    <KeyBinding Key="Esc"
+                            Command="{Binding CloseSearchCommand}"/>
+                </DockPanel.InputBindings>
+
+            </DockPanel>
+        </ScrollViewer>
+    </Grid>
+
+</UserControl>
