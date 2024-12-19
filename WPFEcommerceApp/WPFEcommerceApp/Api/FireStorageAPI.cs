@@ -18,7 +18,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace WPFEcommerceApp {
     public class FireStorageAPI {
-        readonly static string BUCKET = "wano-wpf.appspot.com";
+        readonly static string BUCKET = "wa.no-wpf.appspot.com";
         readonly static string FireStorageEndpoint = "https://firebasestorage.googleapis.com/v0/b/";
         readonly static FirebaseStorage storage = new FirebaseStorage(BUCKET);
         const string tempJPG = "CreateTempJpg.jpg";

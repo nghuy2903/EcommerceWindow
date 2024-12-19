@@ -41,29 +41,25 @@
                 <KeyBinding Key="Esc" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
             </materialDesign:DialogHost.InputBindings>
             <!--Content-->
-            <Grid>
+            <Grid Margin="10,-19,-10,19">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="2.1*"/>
                 </Grid.ColumnDefinitions>
-                <!--Left Column-->
-                <StackPanel Grid.Column="0">
-                    <Label Content="WELCOME!" 
-                           FontSize="63" 
-                           FontWeight="Bold" 
-                           Margin="65,100,0,-5"/>
-                    <Image Source="..\..\..\Assets\Images\img_Boarding.jpg" Margin="-30,50,-30,80"></Image>
-                </StackPanel>
-                <!--Right Column-->
-                <Border Padding="30 0 40 0" Grid.Column="1">
-                    <StackPanel 
-                            x:Name="RightColumnContainer">
 
-                        <Label Content="WANO" FontSize="40" FontWeight="Bold" Margin="0,220,0,20">
-                            <Label.InputBindings>
-                                <MouseBinding Gesture="RightDoubleClick" Command="{Binding KeyHandle_AdminAccess}"/>
-                            </Label.InputBindings>
-                        </Label>
+                <StackPanel Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="437,100,0,0" RenderTransformOrigin="0.498,1.572">
+                    <Label Content="WELCOME!" 
+               FontSize="63" 
+               FontWeight="Bold" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Center" 
+        />
+                </StackPanel>
+
+                <!--Right Column-->
+                <Border Padding="30 0 40 0" Grid.ColumnSpan="2" Margin="357,-20,359,-20">
+                    <StackPanel 
+                            x:Name="RightColumnContainer" Margin="0,267,0,122">
                         <TextBox
                             x:Name="Email"
                             Style="{StaticResource TextBoxHintBlackBorder}"
