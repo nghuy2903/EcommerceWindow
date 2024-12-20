@@ -251,7 +251,7 @@ namespace WPFEcommerceApp
                 if (searchItemViewModels != null && searchItemViewModels.Count != 0)
                 {
                     SearchItemViewModel searchItemViewModel = searchItemViewModels.First();
-                    searchItemViewModel.SourceImage = String.IsNullOrEmpty(link) ? null : link;
+                    searchItemViewModel.SourceImage = String.IsNullOrEmpty(link) ? null : link; 
                 }
                 await Load();
             }

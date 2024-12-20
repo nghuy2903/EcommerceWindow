@@ -338,7 +338,7 @@ namespace WPFEcommerceApp
                 ImageAds = (eventArgs.Parameter as CroppedBitmap);
                 var ads = new Advertisement();
                 ads.Id = await GenerateID.Gen(typeof(Advertisement));
-                string link = await AzureStorageAPI.PushFromImage((BitmapSource)ImageAds, "Default", $"Banner_{ads.Id}");
+                string link = await AzureStorageAPI.PushFromImage((BitmapSource)ImageAds, "default", $"Banner_{ads.Id}");
 
                 ads.Image = link;
                 await adsRepo.Add(ads);

@@ -8,44 +8,73 @@
         Title="WANO" 
         Icon="..\..\..\Assets\Icon\Home.png"
         Height="766" Width="1200"
-        d:Background="White"
         WindowStyle="None"
         x:Name="Splash"
-        WindowStartupLocation="CenterScreen" 
-        FontFamily="Helvetica Neue">
+        WindowStartupLocation="CenterScreen"
+        FontFamily="Segoe UI"
+        Background="Transparent">
+
+    <!-- WindowChrome for custom title bar -->
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0"
-                      CornerRadius="13"/>
+                      CornerRadius="20"/>
     </WindowChrome.WindowChrome>
+
+    <!-- Resources for styling -->
     <Window.Resources>
         <ResourceDictionary>
             <local:MultiValueConverter x:Key="MultiValueConverter"/>
         </ResourceDictionary>
     </Window.Resources>
-    <StackPanel>
-        <TextBlock Text="W A N O" 
-                   FontSize="100" 
-                   HorizontalAlignment="Center" 
-                   Margin="0 169 0 0" 
-                   FontStretch="ExtraCondensed" 
-                   FontWeight="SemiBold">
-            <TextBlock.Effect>
-                <DropShadowEffect  BlurRadius="50"
-                                    ShadowDepth="0.1"
-                                    Direction="69"
-                                    Color="LightGray"/>
-            </TextBlock.Effect>
-        </TextBlock>
-        <Grid >
-            <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
+
+    <!-- Gradient Background for a modern look -->
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="White" Offset="0"/>
+                <GradientStop Color="Gray" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        
+        <!-- Content container -->
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            
+            <!-- Title Text with margin for spacing -->
+            <TextBlock Text="WARBY"
+                       FontSize="100" 
+                       HorizontalAlignment="Center" 
+                       FontStretch="ExtraCondensed" 
+                       FontWeight="SemiBold"
+                       Foreground="White"
+                       Margin="0,0,0,50">
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="15" ShadowDepth="4" Direction="45" Color="Gray"/>
+                </TextBlock.Effect>
+            </TextBlock>
+
+            <!-- Progress Bar with margin for spacing -->
+            <Grid>
+                <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
                              Foreground="{DynamicResource BlackColorBrush}"
-                             IsIndeterminate="true"
-                             Value="0"
-                         Margin="0 100 0 0">
-                <ProgressBar.LayoutTransform>
-                    <ScaleTransform ScaleX="3.3" ScaleY="3.3"/>
-                </ProgressBar.LayoutTransform>
-            </ProgressBar>
-        </Grid>
-    </StackPanel>
+                             IsIndeterminate="True"
+                             Height="120"
+                             Width="120"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
+                             Margin="0,30,0,20" RenderTransformOrigin="0.557,0.042">
+                    <ProgressBar.LayoutTransform>
+                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                    </ProgressBar.LayoutTransform>
+                </ProgressBar>
+            </Grid>
+
+            <!-- Status Text with margin -->
+            <TextBlock Text="Loading, please wait..."
+                       FontSize="30"
+                       HorizontalAlignment="Center"
+                       Foreground="black"
+                       Opacity="0.7"
+                       Margin="0,10,0,0"/>
+        </StackPanel>
+    </Grid>
 </Window>

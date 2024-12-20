@@ -13,7 +13,7 @@ namespace WPFEcommerceApp
 {
     public class AzureStorageAPI
     {
-        private static readonly string connectionString = "";
+        private static readonly string connectionString = "DefaultEndpointsProtocol=https;AccountName=warby;AccountKey=vQfo8DI2qxqpcCUmEckVNUSJfhSGOJA864+f8z024qu3WYE4vAQYkB+FrtzzTq2TEOXgPoSMze/S+ASt7Nxmsg==;EndpointSuffix=core.windows.net";
         const string tempIMG = "TempIMG.jpg";
 
         public static async Task<string> Push(string filePath, string containerName, string blobName, params string[] child)
