@@ -1,95 +1,99 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
+﻿
+
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
-using System.Drawing;
-using System.Drawing.Imaging;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace WPFEcommerceApp
 {
     public class AzureStorageAPI
     {
-        // Connection string to your Azure Storage account
-        private static readonly string connectionString = "YOUR_AZURE_STORAGE_CONNECTION_STRING";
-        const string tempJPG = "CreateTempJpg.jpg";
+        private static readonly string connectionString = "";
         const string tempIMG = "TempIMG.jpg";
 
-        // Push a local file to Azure Blob Storage
-        public static async Task<string> Push(string path, string containerName, string blobName)
+        public static async Task<string> Push(string filePath, string containerName, string blobName, params string[] child)
         {
-            BlobContainerClient container = new BlobContainerClient(connectionString, containerName);
-            await container.CreateIfNotExistsAsync(PublicAccessType.Blob);
+            string blobFullName = GenerateBlobName(blobName, child);
 
-            var stream = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.Read);
-            bool createdFile = false;
+            // Create a BlobServiceClient to interact with the Blob service
+            BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
 
-            // Convert to JPEG if needed
-            Image img = new Bitmap(stream);
-            if (!img.RawFormat.Equals(ImageFormat.Jpeg))
+            // Get a reference to the container
+            BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+
+            // Ensure the container exists
+            await containerClient.CreateIfNotExistsAsync(PublicAccessType.Blob);
+
+            // Get a reference to a blob
+            BlobClient blobClient = containerClient.GetBlobClient(blobFullName);
+
+            // Upload the file to the blob
+            // Upload the file to the blob
+            using (FileStream uploadFileStream = File.OpenRead(filePath))
             {
-                using (var bitmap = new Bitmap(img.Width, img.Height))
-                {
-                    bitmap.SetResolution(img.HorizontalResolution, img.VerticalResolution);
-                    using (var graphic = Graphics.FromImage(bitmap))
-                    {
-                        graphic.Clear(Color.White);
-                        graphic.DrawImageUnscaled(img, 0, 0);
-                    }
-                    bitmap.Save(tempJPG, ImageFormat.Jpeg);
-                }
-                stream.Close();
-                stream = File.Open(tempJPG, FileMode.Open, FileAccess.Read, FileShare.Read);
-                createdFile = true;
+                await blobClient.UploadAsync(uploadFileStream, true);
             }
 
-            // Upload the file
-            BlobClient blobClient = container.GetBlobClient(blobName);
-            await blobClient.UploadAsync(stream, overwrite: true);
-            stream.Close();
-
-            if (createdFile)
-            {
-                File.Delete(tempJPG);
-            }
-
-            return blobClient.Uri.ToString(); // Return URL of uploaded blob
+        
+            // Return the URI of the uploaded blob
+            return blobClient.Uri.ToString();
         }
 
-        // Push a file from a BitmapSource (e.g. image)
-        public static async Task<string> PushFromImage(
-            System.Windows.Media.Imaging.BitmapSource bm,
+        public static async Task<Tuple<bool, string>> PushFromFile(
+            string filePath,
             string containerName,
-            string blobName)
+            string blobName,
+            string oldBlobUri = null,
+            params string[] child)
         {
 
-            FileStream stream = new FileStream(tempIMG, FileMode.Create);
-            System.Windows.Media.Imaging.BitmapEncoder encoder = new System.Windows.Media.Imaging.JpegBitmapEncoder();
-            encoder.Frames.Add(System.Windows.Media.Imaging.BitmapFrame.Create(bm));
-            encoder.Save(stream);
-            stream.Close();
+            if (!File.Exists(filePath))
+            {
+                return new Tuple<bool, string>(false, "");
+            }
 
-            var res = await Push(tempIMG, containerName, blobName);
-            File.Delete(tempIMG);
+            if (oldBlobUri != null)
+            {
+                await Delete(oldBlobUri);
+            }
+
+            var res = await Push(filePath, containerName, blobName, child);
+            return new Tuple<bool, string>(true, res);
+        }
+
+        public static async Task<string> PushFromImage(
+         BitmapSource bitmapSource,
+         string containerName,
+         string blobName,
+         string oldBlobUri = null,
+         params string[] child)
+        {
+            // Save BitmapSource to a temporary file
+            using (FileStream stream = new FileStream(tempIMG, FileMode.Create))
+            {
+                BitmapEncoder encoder = new JpegBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+                encoder.Save(stream);
+            } // The stream is closed automatically here
+
+            // Delete the old blob if provided
+            if (oldBlobUri != null)
+            {
+                await Delete(oldBlobUri);
+            }
+
+            // Upload the image and return the blob URI
+            var res = await Push(tempIMG, containerName, blobName, child);
+            File.Delete(tempIMG); // Clean up temp file
             return res;
         }
 
-        // Delete a file from Azure Blob Storage
-        public static async Task<bool> Delete(string blobUrl)
-        {
-            Uri blobUri = new Uri(blobUrl);
-            string blobName = Path.GetFileName(blobUri.LocalPath);
-            string containerName = blobUri.Segments[1].Trim('/');
 
-            BlobContainerClient container = new BlobContainerClient(connectionString, containerName);
-            BlobClient blobClient = container.GetBlobClient(blobName);
-
-            await blobClient.DeleteIfExistsAsync(DeleteSnapshotsOption.IncludeSnapshots);
-            return true;
-        }
-
-        // Check if a blob exists
         public static async Task<bool> Exist(string containerName, string blobName)
         {
             BlobContainerClient container = new BlobContainerClient(connectionString, containerName);
@@ -97,6 +101,29 @@ namespace WPFEcommerceApp
 
             var exists = await blobClient.ExistsAsync();
             return exists.Value;
+        }
+        public static async Task<bool> Delete(string blobUri)
+        {
+            try
+            {
+                // Get the blob name from the URI
+                BlobClient blobClient = new BlobClient(new Uri(blobUri));
+
+                // Delete the blob
+                await blobClient.DeleteIfExistsAsync();
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception
+                throw new Exception($"Failed to delete blob at {blobUri}", ex);
+            }
+            return true;
+        }
+
+        private static string GenerateBlobName(string name, params string[] childPaths)
+        {
+            List<string> paths = new List<string>(childPaths) { name };
+            return string.Join("/", paths);
         }
     }
 }

@@ -209,7 +209,7 @@ namespace WPFEcommerceApp
             MainViewModel.SetLoading(true);
 
             await adsRepo.Remove(_selectedItem);
-            await FireStorageAPI.Delete(_selectedItem.Image);
+            await AzureStorageAPI.Delete(_selectedItem.Image);
             await Load();
             MainViewModel.SetLoading(false);
 
@@ -338,7 +338,7 @@ namespace WPFEcommerceApp
                 ImageAds = (eventArgs.Parameter as CroppedBitmap);
                 var ads = new Advertisement();
                 ads.Id = await GenerateID.Gen(typeof(Advertisement));
-                string link = await FireStorageAPI.PushFromImage((BitmapSource)ImageAds, "Default", $"Banner_{ads.Id}");
+                string link = await AzureStorageAPI.PushFromImage((BitmapSource)ImageAds, "Default", $"Banner_{ads.Id}");
 
                 ads.Image = link;
                 await adsRepo.Add(ads);

@@ -235,13 +235,13 @@ namespace WPFEcommerceApp
                 ImageAva = (eventArgs.Parameter as CroppedBitmap);
 
                 string link;
-                if (String.IsNullOrEmpty(SourceImageAva) || SourceImageAva.Contains("https://firebasestorage.googleapis.com"))
+                if (String.IsNullOrEmpty(SourceImageAva) || SourceImageAva.Contains("https://warby.blob.core.windows.net"))
                 {
-                    link = await FireStorageAPI.PushFromImage((BitmapSource)ImageAva, "User", $"Ava", AccountStore.instance.CurrentAccount.SourceImageAva, $"{AccountStore.instance.CurrentAccount.Id}");
+                    link = await AzureStorageAPI.PushFromImage((BitmapSource)ImageAva, "user", $"Ava", AccountStore.instance.CurrentAccount.SourceImageAva, $"{AccountStore.instance.CurrentAccount.Id}");
                 }
                 else
                 {
-                    link = await FireStorageAPI.PushFromImage((BitmapSource)ImageAva, "User", "Ava", null, $"{AccountStore.instance.CurrentAccount.Id}");
+                    link = await AzureStorageAPI.PushFromImage((BitmapSource)ImageAva, "user", "Ava", null, $"{AccountStore.instance.CurrentAccount.Id}");
                 }
 
                 AccountStore.instance.CurrentAccount.SourceImageAva = link;
@@ -266,13 +266,13 @@ namespace WPFEcommerceApp
                 ImageBackground = (eventArgs.Parameter as CroppedBitmap);
 
                 string link;
-                if (String.IsNullOrEmpty(SourceImageBackground) || SourceImageBackground.Contains("https://firebasestorage.googleapis.com"))
+                if (String.IsNullOrEmpty(SourceImageBackground) || SourceImageBackground.Contains("https://warby.blob.core.windows.net"))
                 {
-                    link = await FireStorageAPI.PushFromImage((BitmapSource)ImageBackground, "User", $"Background", AccountStore.instance.CurrentAccount.SourceImageAva, $"{AccountStore.instance.CurrentAccount.Id}");
+                    link = await AzureStorageAPI.PushFromImage((BitmapSource)ImageBackground, "user", $"Background", AccountStore.instance.CurrentAccount.SourceImageAva, $"{AccountStore.instance.CurrentAccount.Id}");
                 }
                 else
                 {
-                    link = await FireStorageAPI.PushFromImage((BitmapSource)ImageBackground, "User", "Background", null, $"{AccountStore.instance.CurrentAccount.Id}");
+                    link = await AzureStorageAPI.PushFromImage((BitmapSource)ImageBackground, "user", "Background", null, $"{AccountStore.instance.CurrentAccount.Id}");
                 }
 
                 AccountStore.instance.CurrentAccount.SourceImageBackground = link;

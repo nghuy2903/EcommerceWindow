@@ -526,16 +526,16 @@ namespace WPFEcommerceApp
             {
                 foreach (var imageproduct in imageproducts)
                 {
-                    if (imageproduct.Source.Contains("https://firebasestorage.googleapis.com") && !ImageProducts.Any(p => (p.BMImage.UriSource != null  && p.BMImage.UriSource.ToString() == imageproduct.Source)))
+                    if (imageproduct.Source.Contains("https://warby.blob.core.windows.net") && !ImageProducts.Any(p => (p.BMImage.UriSource != null  && p.BMImage.UriSource.ToString() == imageproduct.Source)))
                     {
-                        await FireStorageAPI.Delete(imageproduct.Source);
+                        await AzureStorageAPI.Delete(imageproduct.Source);
                         await repository.Remove(imageproduct);
                     }
                 }
             }
             foreach (MImageProuct imageProductSource in ImageProducts)
             {
-                if (imageProductSource.Source.Contains("https://firebasestorage.googleapis.com"))
+                if (imageProductSource.Source.Contains("https://warby.blob.core.windows.net"))
                 {
                     Models.ImageProduct imageProduct = new Models.ImageProduct() { Source = imageProductSource.Source, IdProduct = SelectedProduct.Id };
                     SelectedProduct.ImageProducts.Add(imageProduct);
@@ -543,7 +543,7 @@ namespace WPFEcommerceApp
                 }
                 else
                 {     
-                    string link = await FireStorageAPI.PushFromImage(imageProductSource.BMImage, "Product", "Image", null, $"{SelectedProduct.Id}");
+                    string link = await AzureStorageAPI.PushFromImage(imageProductSource.BMImage, "product", "Image", null, $"{SelectedProduct.Id}");
                     Models.ImageProduct imageProduct;
                     imageProduct = new Models.ImageProduct() { Source = link, IdProduct = SelectedProduct.Id };
                     await repository.Add(imageProduct);

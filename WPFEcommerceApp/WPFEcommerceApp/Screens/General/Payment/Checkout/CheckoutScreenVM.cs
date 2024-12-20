@@ -258,7 +258,7 @@ namespace WPFEcommerceApp {
             //                 bmImg.EndInit();
             //             }
             //	BitmapSource bm = bmImg;
-            //	await FireStorageAPI.PushFromImage(bm, "Test", "TestImg");
+            //	await AzureStorageAPI.PushFromImage(bm, "Test", "TestImg");
             //});
             #endregion
             OnEditOrder = new ImmediateCommand<object>(p => {

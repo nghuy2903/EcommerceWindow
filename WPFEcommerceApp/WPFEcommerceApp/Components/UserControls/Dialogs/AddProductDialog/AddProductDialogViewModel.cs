@@ -378,7 +378,7 @@ namespace WPFEcommerceApp
                 await productRepository.Add(product);
                 foreach (MImageProuct source in ImageProducts)
                 {
-                    string link = await FireStorageAPI.PushFromImage(source.BMImage, "Product", "Image", null, $"{id}");
+                    string link = await AzureStorageAPI.PushFromImage(source.BMImage, "product", "image", null, $"{id}");
                     source.Source = link;
                     await imageProductRepository.Add(new Models.ImageProduct() { IdProduct = id, Source = link });
                 }

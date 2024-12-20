@@ -260,26 +260,26 @@ namespace WPFEcommerceApp
 
                 if (isChangedBackground)
                 {
-                    if (String.IsNullOrEmpty(mUser.SourceImageBackground) || mUser.SourceImageBackground.Contains("https://firebasestorage.googleapis.com"))
+                    if (String.IsNullOrEmpty(mUser.SourceImageBackground) || mUser.SourceImageBackground.Contains("https://warby.blob.core.windows.net"))
                     {
-                        link = await FireStorageAPI.PushFromImage((BitmapSource)SourceImageBackground, "User", $"Background", mUser.SourceImageBackground, $"{Shop.Id}");
+                        link = await AzureStorageAPI.PushFromImage((BitmapSource)SourceImageBackground, "user", $"Background", mUser.SourceImageBackground, $"{Shop.Id}");
                     }
                     else
                     {
-                        link = await FireStorageAPI.PushFromImage((BitmapSource)SourceImageBackground, "User", $"Background", null, $"{Shop.Id}");
+                        link = await AzureStorageAPI.PushFromImage((BitmapSource)SourceImageBackground, "user", $"Background", null, $"{Shop.Id}");
                     }
                     Shop.SourceImageBackground = link;
                 }
 
                 if (isChangedAva)
                 {
-                    if (String.IsNullOrEmpty(mUser.SourceImageAva) || mUser.SourceImageAva.Contains("https://firebasestorage.googleapis.com"))
+                    if (String.IsNullOrEmpty(mUser.SourceImageAva) || mUser.SourceImageAva.Contains("https://warby.blob.core.windows.net"))
                     {
-                        link = await FireStorageAPI.PushFromImage((BitmapSource)SourceImageAva, "User", $"Ava", mUser.SourceImageAva, $"{Shop.Id}");
+                        link = await AzureStorageAPI.PushFromImage((BitmapSource)SourceImageAva, "user", $"Ava", mUser.SourceImageAva, $"{Shop.Id}");
                     }
                     else
                     {
-                        link = await FireStorageAPI.PushFromImage((BitmapSource)SourceImageAva, "User", $"Ava", null, $"{Shop.Id}");
+                        link = await AzureStorageAPI.PushFromImage((BitmapSource)SourceImageAva, "user", $"Ava", null, $"{Shop.Id}");
                     }
                     Shop.SourceImageAva = link;
                 }   
