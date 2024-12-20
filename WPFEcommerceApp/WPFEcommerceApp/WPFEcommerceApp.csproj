@@ -80,7 +80,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Api\AzureStorageAPI .cs" />
+    <Compile Include="Api\AzureStorageAPI.cs" />
     <Compile Include="Components\UserControls\AsyncImage\CachedImage.cs" />
     <Compile Include="Components\UserControls\AsyncImage\FileCache.cs" />
     <Compile Include="Components\UserControls\CategoryRequest\DropDown.xaml.cs">
@@ -232,9 +232,11 @@
     </Compile>
     <Compile Include="Screens\Shop\ShopPromo\AddShopPromo\AddShopPromoViewModel.cs" />
     <Compile Include="Api\FavouriteApi.cs" />
-    <Compile Include="Api\FireStorageAPI.cs" />
+
     <Compile Include="Api\GenerateID.cs" />
     <Compile Include="Api\Internet.cs" />
+<Compile Include="Api\AzureStorageAPI.cs" />
+
     <Compile Include="Api\OAuth.cs" />
     <Compile Include="Api\TaskHelper.cs" />
     <Compile Include="Components\UserControls\AsyncImage\AsyncImage.xaml.cs">
