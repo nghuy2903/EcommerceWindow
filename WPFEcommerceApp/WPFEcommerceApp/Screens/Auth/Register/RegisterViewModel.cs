@@ -1,4 +1,4 @@
-﻿using DataAccessLayer;
+using DataAccessLayer;
 using LiveCharts.Helpers;
 using MaterialDesignThemes.Wpf;
 using System;

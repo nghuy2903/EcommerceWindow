@@ -1,6 +1,4 @@
-﻿
-
-using Azure.Storage.Blobs;
+﻿using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using System;
 using System.Collections.Generic;
@@ -33,13 +31,11 @@ namespace WPFEcommerceApp
             BlobClient blobClient = containerClient.GetBlobClient(blobFullName);
 
             // Upload the file to the blob
-            // Upload the file to the blob
             using (FileStream uploadFileStream = File.OpenRead(filePath))
             {
                 await blobClient.UploadAsync(uploadFileStream, true);
             }
 
-        
             // Return the URI of the uploaded blob
             return blobClient.Uri.ToString();
         }
@@ -51,7 +47,6 @@ namespace WPFEcommerceApp
             string oldBlobUri = null,
             params string[] child)
         {
-
             if (!File.Exists(filePath))
             {
                 return new Tuple<bool, string>(false, "");
@@ -67,11 +62,11 @@ namespace WPFEcommerceApp
         }
 
         public static async Task<string> PushFromImage(
-         BitmapSource bitmapSource,
-         string containerName,
-         string blobName,
-         string oldBlobUri = null,
-         params string[] child)
+            BitmapSource bitmapSource,
+            string containerName,
+            string blobName,
+            string oldBlobUri = null,
+            params string[] child)
         {
             // Save BitmapSource to a temporary file
             using (FileStream stream = new FileStream(tempIMG, FileMode.Create))
@@ -79,7 +74,7 @@ namespace WPFEcommerceApp
                 BitmapEncoder encoder = new JpegBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
                 encoder.Save(stream);
-            } // The stream is closed automatically here
+            }
 
             // Delete the old blob if provided
             if (oldBlobUri != null)
@@ -93,7 +88,6 @@ namespace WPFEcommerceApp
             return res;
         }
 
-
         public static async Task<bool> Exist(string containerName, string blobName)
         {
             BlobContainerClient container = new BlobContainerClient(connectionString, containerName);
@@ -102,22 +96,35 @@ namespace WPFEcommerceApp
             var exists = await blobClient.ExistsAsync();
             return exists.Value;
         }
+
         public static async Task<bool> Delete(string blobUri)
         {
             try
             {
-                // Get the blob name from the URI
-                BlobClient blobClient = new BlobClient(new Uri(blobUri));
+                // Parse the URI to get container and blob name
+                Uri uri = new Uri(blobUri);
+                string[] segments = uri.Segments;
+
+                // The container name is the first segment after the initial slash
+                string containerName = segments[1].TrimEnd('/');
+
+                // The blob name is everything after the container name
+                string blobName = string.Join("", segments.Skip(2));
+
+                // Create clients using the connection string
+                BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
+                BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+                BlobClient blobClient = containerClient.GetBlobClient(blobName);
 
                 // Delete the blob
                 await blobClient.DeleteIfExistsAsync();
+                return true;
             }
             catch (Exception ex)
             {
                 // Log or handle the exception
                 throw new Exception($"Failed to delete blob at {blobUri}", ex);
             }
-            return true;
         }
 
         private static string GenerateBlobName(string name, params string[] childPaths)

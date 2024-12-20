@@ -1,95 +1,119 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Windows.Controls.Primitives;
-using System.Windows.Forms;
-using System.Windows.Input;
-using MaterialDesignThemes.Wpf;
-using Microsoft.JScript;
 using WPFEcommerceApp.Models;
 
-namespace WPFEcommerceApp {
-    public class GenerateID {
-        static char reVal(long num) {
-            if(num > -1 && num < 5)
-                return (char)(num +'5');
-            else if(num > 4 && num < 10)
-                return (char)(num - 5 + '0');
-            else if(num > 9 && num < 36)
-                return (char)(num - 10 + 'A');
-            else if(num > 35 && num < 62)
-                return (char)(num - 36 + 'a');
-            else if(num == 62) return '=';
-            else if(num == 63) return '-';
-            return '?';
+namespace WPFEcommerceApp
+{
+    public class GenerateID
+    {
+        static char reVal(long num)
+        {
+            if (num >= 0 && num < 10)
+                return (char)(num + '0'); 
+            else if (num >= 10 && num < 36)
+                return (char)(num - 10 + 'A');  // 'A' - 'Z'
+            else if (num >= 36 && num < 62)
+                return (char)(num - 36 + 'a');  // 'a' - 'z'
+            return 'X';  // Return 'X' if out of range
         }
 
-        static string encode(long inputNum) {
+        static string encode(long inputNum)
+        {
             inputNum += 261816;
             inputNum = (long)(inputNum * 1.62);
-            long index = 0;
             string res = "";
-            while(inputNum > 0) {
-                res += reVal(inputNum % 64);
-                index++;
-                inputNum /= 64;
+            while (inputNum > 0)
+            {
+                res += reVal(inputNum % 62); 
+                inputNum /= 62;
             }
             return res;
         }
-        static public async Task<string> Gen(Type type, string checkProperty = "Id") {
+
+        // Sanitize the generated ID for Azure compatibility
+        static string SanitizeForAzureFilename(string id)
+        {
+            // Remove any invalid characters for Azure storage filenames
+            string sanitized = Regex.Replace(id, @"[^a-zA-Z0-9-_]", "_");
+
+            // Ensure the filename is not too long (maximum length for Azure blob names is 1024 characters)
+            if (sanitized.Length > 1024)
+            {
+                sanitized = sanitized.Substring(0, 1024);
+            }
+
+            return sanitized;
+        }
+
+        // Generate a unique ID
+        static public async Task<string> Gen(Type type, string checkProperty = "Id")
+        {
             long res = 0;
+
+            // Query the database for the current count of records for the specified type
             await Task.Run(() => {
-                using(var context = new EcommerceAppEntities()) {
+                using (var context = new EcommerceAppEntities())
+                {
                     string t = type.Name;
                     var sql = $"SELECT COUNT(*) FROM dbo.{t}";
                     res = context.Database.SqlQuery<int>(sql).Single();
                 }
             });
 
-            #region Fake ID
-            //string id = type.Name.Substring(0, 4);
-            //id = id + (res + 50).ToString();
-            //50 thay bằng các số bắt đầu của mỗi người
-            #endregion
-
-            #region Real ID
             bool check = false;
             string id = "";
-            while(!check) {
+            while (!check)
+            {
                 id = encode(res);
-                if(id.Length < 6)
-                    for(int i = 0; i <= 6 - id.Length; i++)
-                        id = "#" + id;
-                char r1 = (char)(new Random().Next(0, 10) + '0');
-                char r2 = (char)(new Random().Next(36, 62) - 36 + 'a');
-                id = r1 + id;
-                id += r2;
 
+                // Ensure the ID is at least 6 characters long (pad with "0" if needed)
+                while (id.Length < 6)
+                {
+                    id = "0" + id;  // Padding with zeroes
+                }
+
+                // Add random characters to make the ID unique and more secure
+                char r1 = (char)(new Random().Next(0, 10) + '0');  // Random number
+                char r2 = (char)(new Random().Next(36, 62) - 36 + 'a');  // Random letter
+                id = r1 + id + r2;  // Prefix and suffix with random characters
+
+                // Sanitize the ID for Azure Storage compatibility
+                id = SanitizeForAzureFilename(id);
+
+                // Check if the generated ID is unique in the database
                 await Task.Run(() => {
-                    using(var context = new EcommerceAppEntities()) {
+                    using (var context = new EcommerceAppEntities())
+                    {
                         string t = type.Name;
                         var sql = $"SELECT COUNT(1) FROM dbo.{t} WHERE {checkProperty} = '{id}'";
                         check = context.Database.SqlQuery<int>(sql).Single() == 0 ? true : false;
                     }
                 });
-                if(!check) res = (long)(res * 1.5);
+
+                if (!check)
+                {
+                    res = (long)(res * 1.5);  // If not unique, modify the number for the next iteration
+                }
             }
-            #endregion
 
             return id;
         }
-        static public string RandomID(int length = 6) {
+
+        // Generate a random ID of the specified length
+        static public string RandomID(int length = 6)
+        {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             var random = new Random();
             return new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
-        static public string DateTimeID() {
+        // Generate a unique ID based on the current DateTime
+        static public string DateTimeID()
+        {
             var time = DateTime.Now;
             string res = time.Year.ToString("D2") + time.Month.ToString("D2")
                 + time.Day.ToString("D2") + time.Hour.ToString("D2")

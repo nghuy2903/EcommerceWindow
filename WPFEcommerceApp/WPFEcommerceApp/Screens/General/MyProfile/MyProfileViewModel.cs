@@ -235,6 +235,9 @@ namespace WPFEcommerceApp
                 ImageAva = (eventArgs.Parameter as CroppedBitmap);
 
                 string link;
+                
+
+
                 if (String.IsNullOrEmpty(SourceImageAva) || SourceImageAva.Contains("https://warby.blob.core.windows.net"))
                 {
                     link = await AzureStorageAPI.PushFromImage((BitmapSource)ImageAva, "user", $"Ava", AccountStore.instance.CurrentAccount.SourceImageAva, $"{AccountStore.instance.CurrentAccount.Id}");
