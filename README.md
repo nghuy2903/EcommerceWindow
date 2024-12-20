@@ -1,4 +1,5 @@
-[![Nuget][materialDesignThemes-shield]][materialDesignThemes-url]   [![Nuget][liveChart-shield]][liveChart-url] [![Nuget][entityFramework-shield]][entityFramework-url]  [![Nuget][firebaseStorage-shield]][firebaseStorage-url]
+[![Nuget][materialDesignThemes-shield]][materialDesignThemes-url]   [![Nuget][liveChart-shield]][liveChart-url] [![Nuget][entityFramework-shield]][entityFramework-url] [![Nuget][azureStorage-shield]][azureStorage-url]
+
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [materialDesignThemes-shield]: https://img.shields.io/nuget/v/MaterialDesignThemes?label=MaterialDesignThemes&logo=MaterialDesignThemes
@@ -7,8 +8,8 @@
 [entityFramework-url]: https://www.nuget.org/packages/EntityFramework/
 [liveChart-shield]: https://img.shields.io/nuget/v/LiveCharts.Wpf?label=LiveCharts.Wpf&logo=MaterialDesignThemes
 [liveChart-url]: https://www.nuget.org/packages/LiveCharts.Wpf
-[firebaseStorage-shield]: https://img.shields.io/nuget/v/FirebaseStorage.net?label=FirebaseStorage.net&logo=FirebaseStorage.net
-[firebaseStorage-url]: https://www.nuget.org/packages/FirebaseStorage.net
+[azureStorage-shield]: https://img.shields.io/badge/Azure%20Storage-Available-brightgreen
+[azureStorage-url]: https://www.nuget.org/packages/YourAzurePackageName/
 
 ## Hướng dẫn cài đặt
  **1. Tải Project về máy**
