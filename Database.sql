@@ -276,11 +276,11 @@ alter table RatingInfo
 add constraint FK_RatingInfo_IdRating foreign key (IdRating) references Rating(Id)
 
 --MockData
-INSERT [dbo].[UserLogin] VALUES (N'admin', '2023-1-16', N'lqZi7R6xGddaRnT/gy0B0pUaZQNBCILNNj0UTCQK6Rk=', N'admin', N'JP3nrSaeTwKVChHa2OhA6XB8VOYbfTcfBDt8lxQzdNw=', 0)
+INSERT [dbo].[UserLogin] VALUES (N'admin', '2022-12-31', N'/PJpZaoxR7UyEj6U4/LtwVk0kk5I8mnamcgPGuDoRDU=', N'admin@gmail.com', N'TnnhLJxKdLsoohH3S5IoMheY9jVc3/+dX9cUeQ8y0p4=', 0)
 GO
-INSERT [dbo].[UserLogin] VALUES (N'shop50', '2023-1-16', N'DV7GZ5+fth9vlhVEVHYXnejHgzhjd58O8DNyOFbRfHo=', N'yauboi@protonmail.com', N'34DpGL/DIHIxxdxh0bgZ0sDFxsN27vh9S8V0MhcoNjQ=', 0)
+INSERT [dbo].[UserLogin] VALUES (N'shop50', '2022-12-31', N'/PJpZaoxR7UyEj6U4/LtwVk0kk5I8mnamcgPGuDoRDU=', N'yauboi@protonmail.com',N'TnnhLJxKdLsoohH3S5IoMheY9jVc3/+dX9cUeQ8y0p4=', 0)
 GO
-INSERT [dbo].[UserLogin] VALUES (N'shop51', '2023-1-16', N'uMS3oY91AlY830gSI2xQ/vQ6s8B966Pc77xg7ax1w+w=', N'hwangvu@protonmail.com', N'lvxt4ggH/USzQIgaN+6Yg+8CnaFiT9sM/NEyd5EEHW4=', 0)
+INSERT [dbo].[UserLogin] VALUES (N'shop51', '2022-12-31', N'/PJpZaoxR7UyEj6U4/LtwVk0kk5I8mnamcgPGuDoRDU=', N'hwangvu@protonmail.com', N'TnnhLJxKdLsoohH3S5IoMheY9jVc3/+dX9cUeQ8y0p4=', 0)
 GO
 INSERT [dbo].[MUser] ([Id], [Role], [Name], [PhoneNumber], [Email], [Gender], [DOB], [Description], [StatusUser], [StatusShop], [SourceImageAva], [SourceImageBackground], [DefaultAddress]) VALUES (N'admin', N'Admin', N'An Vũ', N'0123456789', N'admin', 0, NULL, N'', N'NotBanned', N'NotExist', NULL, NULL, N'20230115235046')
 GO
@@ -988,17 +988,16 @@ INSERT [dbo].[AdInUse] ([Id], [Position]) VALUES (N'adv52', 3)
 GO
 INSERT [dbo].[AdInUse] ([Id], [Position]) VALUES (N'adv50', 2)
 GO
-INSERT [dbo].[UserLogin] VALUES (N'shop01', '2023-1-17', N'HFOfer7qw1fOcX/Mekcrs3ImzXyO6+MEDrZnfchBsP0=', N'trin41996@gmail.com', N'HFOfer7qw1fOcX/Mekcrs3ImzXyO6+MEDrZnfchBsP0=', 0)
+INSERT [dbo].[UserLogin] VALUES (N'shop01',  '2024-12-31', N'/PJpZaoxR7UyEj6U4/LtwVk0kk5I8mnamcgPGuDoRDU=', N'shop01@gmail.com', N'TnnhLJxKdLsoohH3S5IoMheY9jVc3/+dX9cUeQ8y0p4=', 0)
 GO
-INSERT [dbo].[UserLogin] VALUES (N'shop02', '2023-1-17', N'uMS3oY91AlY830gSI2xQ/vQ6s8B966Pc77xg7ax1w+w=', N'trin2187@gmail.com', N'lvxt4ggH/USzQIgaN+6Yg+8CnaFiT9sM/NEyd5EEHW4=', 0)
-GO
+INSERT [dbo].[UserLogin] VALUES (N'shop02',  '2024-12-31', N'/PJpZaoxR7UyEj6U4/LtwVk0kk5I8mnamcgPGuDoRDU=', N'shop02@gmail.com', N'TnnhLJxKdLsoohH3S5IoMheY9jVc3/+dX9cUeQ8y0p4=', 0)
 
-INSERT [dbo].[MUser] ([Id], [Role], [Name], [PhoneNumber], [Email], [Gender], [DOB], [Description], [StatusUser], [StatusShop], [DefaultAddress]) VALUES (N'shop01', N'Shop', N'Karin Shop', N'0123456789', N'trin41996@gmail.com', 0, NULL, N'- Uy tín tạo nên thuong hiệu shop. 
+INSERT [dbo].[MUser] ([Id], [Role], [Name], [PhoneNumber], [Email], [Gender], [DOB], [Description], [StatusUser], [StatusShop], [DefaultAddress]) VALUES (N'shop01', N'Shop', N'Karin Shop', N'0123456789', N'shop01@gmail.com', 0, NULL, N'- Uy tín tạo nên thuong hiệu shop. 
 - Giao hàng và hỗ trợ đổi trả trong tuần đầu tiên.
 - Có bảo hành và hóa đơn đầy đủ.
 - Cam kết chất lượng.', N'NotBanned', N'NotBanned', N'20230115234749')
 GO
-INSERT [dbo].[MUser] ([Id], [Role], [Name], [PhoneNumber], [Email], [Gender], [DOB], [Description], [StatusUser], [StatusShop], [DefaultAddress]) VALUES (N'shop02', N'Shop', N'Hanabi Shop', N'0123456789', N'trin2187@gmail.com', 0, NULL, N'- Chuyên các mặt hàng thời trang hiện đại, uy tín, chất lượng. 
+INSERT [dbo].[MUser] ([Id], [Role], [Name], [PhoneNumber], [Email], [Gender], [DOB], [Description], [StatusUser], [StatusShop], [DefaultAddress]) VALUES (N'shop02', N'Shop', N'Hanabi Shop', N'0123456789', N'shop02@gmail.com', 0, NULL, N'- Chuyên các mặt hàng thời trang hiện đại, uy tín, chất lượng. 
 - Giao hàng và hỗ trợ đổi trả trong tuần đầu tiên.
 - Có bảo hành và hóa đơn đầy đủ.
 - Cam kết chất lượng.', N'NotBanned', N'NotBanned', N'20230115235733')
@@ -1338,14 +1337,14 @@ GO
 INSERT [dbo].[Category] ([Id], [Name], [Status]) VALUES (N'cate27', N'Shoes', N'NotBanned')
 GO
 
-INSERT [dbo].[UserLogin] ([IdUser], [CreatedDate], [Password], [Username], [Salt], [Provider]) VALUES (N'usr025', CAST(N'2023-01-16T00:00:00.000' AS DateTime), N'97Cm+9mxidJNqRRQYTBX91dTboeHH5I1Wxb/qEouGx8=', N'21521495@gm.uit.edu.vn', N'Pm1hGhmUURIuUZhL47Za2IyHWuOWkMIb6uoAcJQkGNs=', 0)
+INSERT [dbo].[UserLogin] ([IdUser], [CreatedDate], [Password], [Username], [Salt], [Provider]) VALUES (N'usr025', CAST(N'2023-01-16T00:00:00.000' AS DateTime), N'/PJpZaoxR7UyEj6U4/LtwVk0kk5I8mnamcgPGuDoRDU=', N'6351071052@st.utc2.edu.vn', N'TnnhLJxKdLsoohH3S5IoMheY9jVc3/+dX9cUeQ8y0p4=', 0)
 GO
-INSERT [dbo].[UserLogin] ([IdUser], [CreatedDate], [Password], [Username], [Salt], [Provider]) VALUES (N'usr026', CAST(N'2023-01-16T00:00:00.000' AS DateTime), N'laqw1vR1ZJtg/f0p8oOUtF8RjdcfmH3LRFmQAmaTI/w=', N'isitaniceday@gmail.com', N'aMuYjAB+AZqZV+7k7964jnF5RWK3bFViDValmS1GuRw=', 0)
+INSERT [dbo].[UserLogin] ([IdUser], [CreatedDate], [Password], [Username], [Salt], [Provider]) VALUES (N'usr026', CAST(N'2023-01-16T00:00:00.000' AS DateTime),N'/PJpZaoxR7UyEj6U4/LtwVk0kk5I8mnamcgPGuDoRDU=', N'lethimcook@gmail.com', N'TnnhLJxKdLsoohH3S5IoMheY9jVc3/+dX9cUeQ8y0p4=', 0)
 GO
 
-INSERT [dbo].[MUser] ([Id], [Role], [Name], [PhoneNumber], [Email], [Gender], [DOB], [Description], [StatusUser], [StatusShop], [SourceImageAva], [SourceImageBackground], [DefaultAddress]) VALUES (N'usr025', N'Shop', N'Winter Clothing', N'0135798642', N'21521495@gm.uit.edu.vn', 1, NULL, N'We are committed to making the best products on earth—and keeping Mother Nature, our communities and the future in focus.', N'NotBanned', N'NotBanned', NULL, NULL, 'add26')
+INSERT [dbo].[MUser] ([Id], [Role], [Name], [PhoneNumber], [Email], [Gender], [DOB], [Description], [StatusUser], [StatusShop], [SourceImageAva], [SourceImageBackground], [DefaultAddress]) VALUES (N'usr025', N'Shop', N'Winter Clothing', N'0135798642', N'6351071052@st.utc2.edu.vn', 1, NULL, N'We are committed to making the best products on earth—and keeping Mother Nature, our communities and the future in focus.', N'NotBanned', N'NotBanned', NULL, NULL, 'add26')
 GO
-INSERT [dbo].[MUser] ([Id], [Role], [Name], [PhoneNumber], [Email], [Gender], [DOB], [Description], [StatusUser], [StatusShop], [SourceImageAva], [SourceImageBackground], [DefaultAddress]) VALUES (N'usr026', N'Shop', N'Casual', N'0796789123', N'isitaniceday@gmail.com', 1, NULL, N'MORE SUSTAINABLE PRODUCTION', N'NotBanned', N'NotBanned', NULL, NULL, 'add25')
+INSERT [dbo].[MUser] ([Id], [Role], [Name], [PhoneNumber], [Email], [Gender], [DOB], [Description], [StatusUser], [StatusShop], [SourceImageAva], [SourceImageBackground], [DefaultAddress]) VALUES (N'usr026', N'Shop', N'Casual', N'0796789123', N'lethimcook@gmail.com', 1, NULL, N'MORE SUSTAINABLE PRODUCTION', N'NotBanned', N'NotBanned', NULL, NULL, 'add25')
 GO
 
 INSERT [dbo].[Address] ([Id], [IdUser], [Name], [PhoneNumber], [Address], [Status]) VALUES (N'add25', N'usr026', N'Formal', N'024683579', N' 38 Dang Van Ngu St., Lane 4, Dong Da Dist., Hanoi', 1)
