@@ -26,12 +26,3 @@
 - Mở project vừa tải trong Visual Studio 
 - Vào file **App.config** sửa trường **data source** trong **connectionString** thành **Server name** vừa thêm dữ liệu
 
-*Ví dụ:* nếu **Server name** thêm dữ liệu là *DESKTOP*
-
-`<add name="EcommerceAppEntities" connectionString="metadata=res://*/Models.Model.csdl|res://*/Models.Model.ssdl|res://*/Models.Model.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=VU-HOANG\SQLEXPRESS;initial catalog=EcommerceApp;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />`
-
-được sửa lại thành 
-
-`<add name="EcommerceAppEntities" connectionString="metadata=res://*/Models.Model.csdl|res://*/Models.Model.ssdl|res://*/Models.Model.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=DESKTOP;initial catalog=EcommerceApp;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />`
-- **Build** project để hoàn tất
-
