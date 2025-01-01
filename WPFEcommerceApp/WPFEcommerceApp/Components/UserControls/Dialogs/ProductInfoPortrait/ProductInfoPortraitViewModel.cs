@@ -386,37 +386,69 @@ namespace WPFEcommerceApp
         }
         private async Task UpdateImageProduct()
         {
+            // Clear the current ImageProducts list
             SelectedProduct.ImageProducts.Clear();
+
             var repository = new GenericDataRepository<Models.ImageProduct>();
+
+            // Get the list of old images for the product from the database
             ICollection<Models.ImageProduct> imageproducts = await repository.GetListAsync(p => p.IdProduct == SelectedProduct.Id);
+
             if (imageproducts != null)
             {
                 foreach (var imageproduct in imageproducts)
                 {
-                    if (imageproduct.Source.Contains("https://warby.blob.core.windows.net") && !ImageProducts.Any(p => (p.BMImage.UriSource != null && p.BMImage.UriSource.ToString() == imageproduct.Source)))
+                    // Check if the image source is from Firebase
+                    if (imageproduct.Source.Contains("https://firebasestorage.googleapis.com"))
                     {
+                        // Since we don't control Firebase, just remove the record from the database
+                        await repository.Remove(imageproduct);
+                    }
+                    else if (imageproduct.Source.Contains("https://warby.blob.core.windows.net") &&
+                        !ImageProducts.Any(p => (p.BMImage.UriSource != null && p.BMImage.UriSource.ToString() == imageproduct.Source)))
+                    {
+                        // If it's an Azure blob link, delete it from Azure
                         await AzureStorageAPI.Delete(imageproduct.Source);
+
+                        // Remove the record from the database
                         await repository.Remove(imageproduct);
                     }
                 }
             }
+
+            // Now upload new images to Azure and update the database with new links
             foreach (MImageProuct imageProductSource in ImageProducts)
             {
                 if (imageProductSource.Source.Contains("https://warby.blob.core.windows.net"))
                 {
-                    Models.ImageProduct imageProduct = new Models.ImageProduct() { Source = imageProductSource.Source, IdProduct = SelectedProduct.Id };
+                    // Check if the Azure image already exists in the database
+                    Models.ImageProduct existingImageProduct = await repository.GetSingleAsync(p => p.Source == imageProductSource.Source && p.IdProduct == SelectedProduct.Id);
+
+                    if (existingImageProduct != null)
+                    {
+                        SelectedProduct.ImageProducts.Add(existingImageProduct);
+                        continue;
+                    }
+
+                    // Add the existing Azure image to the database
+                    Models.ImageProduct imageProduct = new Models.ImageProduct()
+                    {
+                        Source = imageProductSource.Source,
+                        IdProduct = SelectedProduct.Id
+                    };
                     SelectedProduct.ImageProducts.Add(imageProduct);
                     continue;
                 }
                 else
                 {
+                    // Upload new images to Azure and update the database
                     string link = await AzureStorageAPI.PushFromImage(imageProductSource.BMImage, "product", "Image", null, $"{SelectedProduct.Id}");
-                    Models.ImageProduct imageProduct;
-                    imageProduct = new Models.ImageProduct() { Source = link, IdProduct = SelectedProduct.Id };
+                    Models.ImageProduct imageProduct = new Models.ImageProduct() { Source = link, IdProduct = SelectedProduct.Id };
                     await repository.Add(imageProduct);
                     SelectedProduct.ImageProducts.Add(imageProduct);
                 }
             }
         }
+
     }
 }
