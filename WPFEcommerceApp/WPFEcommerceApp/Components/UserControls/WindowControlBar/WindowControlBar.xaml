@@ -68,7 +68,7 @@
             <!--Drag Area-->
             <Grid x:Name="TitleBarContainer" Background="Transparent">
                 <Label
-                    Height="auto" Content="WANO"
+                    Height="auto" Content="WARBY"
                     Margin="15 0"
                     FontSize="{StaticResource FontSizeDescription}"
                         FontWeight="Regular"

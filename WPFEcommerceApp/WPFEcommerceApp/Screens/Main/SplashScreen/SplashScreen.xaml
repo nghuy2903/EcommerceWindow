@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFEcommerceApp"
         mc:Ignorable="d"
-        Title="WANO" 
+        Title="WARBY" 
         Icon="..\..\..\Assets\Icon\Home.png"
         Height="766" Width="1200"
         WindowStyle="None"

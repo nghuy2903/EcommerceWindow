@@ -84,7 +84,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock 
                 Grid.ColumnSpan="2"
-                   Text="BECOME A WANO's MEMBER" 
+                   Text="BECOME A WARBY's MEMBER" 
                    TextAlignment="Center"
                    FontWeight="Bold"
                    FontSize="30"
@@ -110,7 +110,7 @@
                             Height="10"/>
                 </Button>
             </Grid>
-            <TextBlock Text="Create your WANO account and get access to many variety of products"
+            <TextBlock Text="Create your WARBY account and get access to many variety of products"
                    TextAlignment="Center"
                    FontWeight="Bold"
                    FontSize="20"
@@ -179,7 +179,7 @@
                 <CheckBox
                     Margin="30 30 0 15"
                     IsChecked="{Binding IsCheckAgree, Mode=TwoWay}"
-                    Content="Agree to WANO's Privacy Policy and Terms of Use"
+                    Content="Agree to WARBY's Privacy Policy and Terms of Use"
                     FontSize="15"
                     Background="{StaticResource BlackColorBrush}">
                     <CheckBox.InputBindings>

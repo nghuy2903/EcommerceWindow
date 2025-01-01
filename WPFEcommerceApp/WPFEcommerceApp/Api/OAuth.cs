@@ -67,7 +67,7 @@ namespace WPFEcommerceApp {
             // Sends an HTTP response to the browser.
             var response = context.Response;
             string responseString = string.Format(
-                "<html><head><meta http-equiv='refresh' content='2;url=https://google.com'></head><body><h2>Return to the WANO....</h2></body></html>"
+                "<html><head><meta http-equiv='refresh' content='2;url=https://google.com'></head><body><h2>Return to the WARBY....</h2></body></html>"
                 );
             var buffer = Encoding.UTF8.GetBytes(responseString);
             response.ContentLength64 = buffer.Length;

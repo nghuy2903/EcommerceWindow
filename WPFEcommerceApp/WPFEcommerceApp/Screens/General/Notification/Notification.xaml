@@ -63,7 +63,7 @@
             <ColumnDefinition Width="8*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
-            <TextBlock Text="WANO'S"
+            <TextBlock Text="WARBY'S"
                        FontSize="{StaticResource FontSizeHeadline}"
                        FontWeight="Bold"
                        Margin="20 50 40 0"

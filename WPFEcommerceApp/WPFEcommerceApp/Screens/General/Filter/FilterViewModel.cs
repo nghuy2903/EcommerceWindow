@@ -572,7 +572,7 @@ namespace WPFEcommerceApp
             if (string.IsNullOrEmpty(Condition.ShopText))
             {
                 Condition.ShopText = "";
-                SearchBy = "In WANO";
+                SearchBy = "In WARBY";
                 IsNeedSearchBy = false;
             }
             else
@@ -705,7 +705,7 @@ namespace WPFEcommerceApp
             IList<ProductBlockViewModel> tempProducts = new List<ProductBlockViewModel>();
             if (isHasSize)
             {
-                if (SearchBy == "In WANO")
+                if (SearchBy == "In WARBY")
                 {
                     for(int i = 0; i < maxLength; i++)
                     {
@@ -739,7 +739,7 @@ namespace WPFEcommerceApp
             }
             else
             {
-                if (SearchBy == "In WANO")
+                if (SearchBy == "In WARBY")
                 {
                     for (int i = 0; i < maxLength; i++)
                     {

@@ -33,7 +33,7 @@
             Background="{StaticResource WhiteColorBrush}"
             PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
             <StackPanel>
-                <TextBlock Text="WANO'S PRODUCT"
+                <TextBlock Text="WARBY'S PRODUCT"
                        FontSize="{StaticResource FontSizeHeadline}"
                        TextWrapping="Wrap"
                        FontWeight="Bold"
@@ -350,7 +350,7 @@
                                 Visibility="{c:Binding IsNeedSearchBy, UpdateSourceTrigger=PropertyChanged}"
                                 materialDesign:TextFieldAssist.UnderlineBrush ="Transparent">
                                 <ComboBoxItem Content="Only in this shop"/>
-                                <ComboBoxItem Content="In WANO"/>
+                                <ComboBoxItem Content="In WARBY"/>
                             </ComboBox>
                             <Button
                                 Grid.Column="3"

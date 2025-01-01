@@ -59,7 +59,7 @@ namespace WPFEcommerceApp {
                             var cts = new CancellationTokenSource();
                             cts.CancelAfter(3000);
                             try {
-                                await new OAuth().SendEmail(Email, "[WANO] - Reset password Code", body).AsCancellable(cts.Token);
+                                await new OAuth().SendEmail(Email, "[WARBY] - Reset password Code", body).AsCancellable(cts.Token);
                             } catch {
                                 //flag = false;
                             }

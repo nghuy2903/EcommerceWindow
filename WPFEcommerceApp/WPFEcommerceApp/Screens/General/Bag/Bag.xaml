@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         <TextBlock
                 Grid.Row="0"
-                Text="WANO'S BAG"
+                Text="WARBY'S BAG"
                    Margin="20,30"
                    FontSize="{StaticResource FontSizeHeadline}">
 

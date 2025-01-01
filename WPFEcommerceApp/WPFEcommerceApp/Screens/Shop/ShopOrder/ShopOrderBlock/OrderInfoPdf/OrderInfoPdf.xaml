@@ -34,7 +34,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock
                     Margin="30 0 0 0"
-                    Text="WANO"
+                    Text="WARBY"
                     FontSize="{StaticResource FontSizeHeadline}"
                     FontWeight="Bold"/>
                 <StackPanel
