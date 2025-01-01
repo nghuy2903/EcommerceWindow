@@ -86,19 +86,17 @@ namespace WPFEcommerceApp
         }
 
         public static async Task<string> PushFromImage(
-        BitmapSource bitmapSource,
-        string containerName,
-        string blobName,
-        string oldBlobUri = null,
-        params string[] child)
+      BitmapSource bitmapSource,
+      string containerName,
+      string blobName,
+      string oldBlobUri = null,
+      params string[] child)
         {
-            // Ensure the blobName includes an extension
-            if (!blobName.EndsWith(".jpg"))
-            {
-                blobName += ".jpg";  // or use the appropriate extension (e.g., ".png")
-            }
+            // Add a unique identifier to the blob name
+            blobName = $"{Path.GetFileNameWithoutExtension(blobName)}_{Guid.NewGuid()}{Path.GetExtension(blobName)}";
 
-            string tempFilePath = Path.ChangeExtension(tempIMG, ".jpg"); // Use ".jpg" or other extension
+            // Rest of the method remains unchanged
+            string tempFilePath = Path.ChangeExtension(tempIMG, ".jpg");
             using (FileStream stream = new FileStream(tempFilePath, FileMode.Create))
             {
                 BitmapEncoder encoder = new JpegBitmapEncoder();
@@ -106,38 +104,55 @@ namespace WPFEcommerceApp
                 encoder.Save(stream);
             }
 
-            // Delete the old blob if provided
             if (oldBlobUri != null)
             {
                 await Delete(oldBlobUri);
             }
 
-            // Upload the image and return the blob URI
             var res = await Push(tempFilePath, containerName, blobName, child);
-            File.Delete(tempFilePath); // Clean up temp file
+            File.Delete(tempFilePath);
             return res;
         }
 
 
-        // Method to check if a blob exists in the container
         public static async Task<bool> Exist(string containerName, string blobName)
         {
             try
             {
-                BlobContainerClient container = new BlobContainerClient(connectionString, containerName);
-                BlobClient blobClient = container.GetBlobClient(blobName);
+                // Validate container and blob names
+                if (string.IsNullOrWhiteSpace(containerName) || string.IsNullOrWhiteSpace(blobName))
+                {
+                    throw new ArgumentException("Container name or blob name cannot be null or empty.");
+                }
 
-                var exists = await blobClient.ExistsAsync();
-                return exists.Value;
+                // Initialize container and blob clients
+                BlobContainerClient containerClient = new BlobContainerClient(connectionString, containerName);
+                BlobClient blobClient = containerClient.GetBlobClient(blobName);
+
+                // Check blob existence
+                BlobProperties properties = await blobClient.GetPropertiesAsync();
+                return true;
+            }
+            catch (Azure.RequestFailedException ex) when (ex.Status == 404)
+            {
+                // Blob does not exist
+                return false;
             }
             catch (Exception ex)
             {
-                // Log or handle the exception as necessary
-                throw new Exception($"Error checking existence of blob: {blobName}", ex);
+                // Log unexpected errors (for production, use a logging framework)
+                Console.WriteLine($"Error checking blob existence: {ex.Message}");
+                throw;
             }
         }
 
-        // Method to delete a blob from Azure Blob Storage
+        public static  async Task<bool> CheckIfBlobExists(string blobUri)
+        {
+            var blobClient = new BlobClient(new Uri(blobUri));
+            return await blobClient.ExistsAsync();
+        }
+
+
         public static async Task<bool> Delete(string blobUri)
         {
             try
@@ -163,15 +178,16 @@ namespace WPFEcommerceApp
             }
             catch (Exception ex)
             {
-                // Log or handle the exception as necessary
-                throw new Exception($"Failed to delete blob at {blobUri}", ex);
+                return false;
             }
         }
 
-        // Helper method to generate a blob name from child paths and blob name
         private static string GenerateBlobName(string name, params string[] childPaths)
         {
-            return string.Join("/", childPaths.Append(name));
+            string uniqueId = Guid.NewGuid().ToString(); 
+            string newName = Path.GetFileNameWithoutExtension(name) + "_" + uniqueId + Path.GetExtension(name);
+            return string.Join("/", childPaths.Append(newName));
         }
+
     }
 }

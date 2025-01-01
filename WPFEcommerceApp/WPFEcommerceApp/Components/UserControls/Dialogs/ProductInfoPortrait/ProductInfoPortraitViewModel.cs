@@ -1,4 +1,4 @@
-﻿using DataAccessLayer;
+using DataAccessLayer;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections;
@@ -37,7 +37,7 @@ namespace WPFEcommerceApp
         public ICommand OpenProductInfoLandscapeCommand { get; set; }
         public ICommand CheckOneSizeCommand { get; set; }
         public ICommand ChangeStatusCommand { get; set; }
-        public ICommand DoubleClickCommand { get; set; } 
+        public ICommand DoubleClickCommand { get; set; }
 
         private WPFEcommerceApp.Models.Product selectedProduct;
         public WPFEcommerceApp.Models.Product SelectedProduct
@@ -165,14 +165,14 @@ namespace WPFEcommerceApp
                     ImageProducts.Add(new MImageProuct() { BMImage = bitmapImage, Source = item.Source });
                 }
             }
-            
+
             if (ImageProducts.Count == 0)
             {
                 BitmapImage bitmap = new BitmapImage();
                 bitmap.BeginInit();
                 bitmap.UriSource = new Uri(Properties.Resources.DefaultProductImage);
                 bitmap.EndInit();
-                SelectedImage = new MImageProuct() { BMImage=bitmap, Source=Properties.Resources.DefaultProductImage};
+                SelectedImage = new MImageProuct() { BMImage = bitmap, Source = Properties.Resources.DefaultProductImage };
             }
             else
             {
@@ -258,18 +258,18 @@ namespace WPFEcommerceApp
                             {
                                 DialogHost.Show(PreviousItem, "Main");
                             }
-                            if(ImageProducts.Count == 0)
+                            if (ImageProducts.Count == 0)
                             {
                                 BitmapImage bitmap = new BitmapImage();
                                 bitmap.BeginInit();
                                 bitmap.UriSource = new Uri(Properties.Resources.DefaultProductImage);
                                 bitmap.EndInit();
                                 SelectedImage = new MImageProuct() { BMImage = bitmap, Source = Properties.Resources.DefaultProductImage };
-                            }    
+                            }
                             else
                             {
                                 SelectedImage = ImageProducts[0];
-                            }    
+                            }
                         })
                     };
                     MainViewModel.SetLoading(false);
@@ -327,7 +327,7 @@ namespace WPFEcommerceApp
             foreach (var item in SelectedProduct.ImageProducts)
             {
                 BitmapImage bitmap = new BitmapImage(new Uri(item.Source));
-                ImageProducts.Add(new MImageProuct() { BMImage = bitmap, Source = item.Source});
+                ImageProducts.Add(new MImageProuct() { BMImage = bitmap, Source = item.Source });
             }
             if (ImageProducts.Count > 0 && SelectedImage.BMImage.UriSource.ToString() == Properties.Resources.DefaultProductImage)
             {
@@ -416,7 +416,7 @@ namespace WPFEcommerceApp
                 }
             }
 
-            // Now upload new images to Azure and update the database with new links
+            // upload new images to Azure and update the database with new links
             foreach (MImageProuct imageProductSource in ImageProducts)
             {
                 if (imageProductSource.Source.Contains("https://warby.blob.core.windows.net"))
