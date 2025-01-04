@@ -59,7 +59,7 @@
                 <!--Right Column-->
                 <Border Padding="30 0 40 0" Grid.ColumnSpan="2" Margin="357,-20,359,-20">
                     <StackPanel 
-                            x:Name="RightColumnContainer" Margin="0,267,0,122">
+                            x:Name="RightColumnContainer" Margin="0,280,0,122">
                         <TextBox
                             x:Name="Email"
                             Style="{StaticResource TextBoxHintBlackBorder}"
@@ -163,14 +163,7 @@
                         CommandParameter="{Binding ElementName=LoginWindow}"
                         materialDesign:RippleAssist.Feedback ="Transparent"
                         FontSize="10">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="..\..\..\Assets\Icon\icon_google.png"
-                                   Width="36" Height="36"
-                                   VerticalAlignment="Center"/>
-                                <Label Content="Sign in with google"
-                                   FontSize="15"
-                                   VerticalAlignment="Center"/>
-                            </StackPanel>
+                
                         </Button>
                     </StackPanel>
                 </Border>
